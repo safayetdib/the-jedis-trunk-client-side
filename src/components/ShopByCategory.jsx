@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import ToyCard from './ToyCard';
+import { Typography } from '@material-tailwind/react';
 
 const ShopByCategory = () => {
 	const [categories, setCategories] = useState([]);
@@ -27,6 +29,10 @@ const ShopByCategory = () => {
 
 	return (
 		<section className="mx-auto max-w-7xl px-4">
+			<Typography variant="h3" color="blue-gray" className="my-10 text-center">
+				Shop By Category
+			</Typography>
+
 			<Tabs>
 				<TabList>
 					{categories.map(({ _id, name }) => (
@@ -38,9 +44,11 @@ const ShopByCategory = () => {
 
 				{categories.map(({ _id }) => (
 					<TabPanel key={_id}>
-						{toysData.map(({ _id, name }) => (
-							<h2 key={_id}>{name}</h2>
-						))}
+						<div className="grid grid-cols-1 justify-items-center gap-4 py-2 md:grid-cols-2 lg:grid-cols-3">
+							{toysData.map((toy) => (
+								<ToyCard key={toy._id} toy={toy} />
+							))}
+						</div>
 					</TabPanel>
 				))}
 			</Tabs>

@@ -11,12 +11,11 @@ import {
 	IconButton,
 	Collapse,
 } from '@material-tailwind/react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaJedi } from 'react-icons/fa';
 import {
 	AiOutlineAccountBook,
 	AiOutlineBug,
-	AiOutlineEdit,
 	AiOutlineHome,
 	AiOutlineLogin,
 	AiOutlinePlusCircle,
@@ -110,40 +109,66 @@ const Header = () => {
 							handler={setIsMenuOpen}
 							placement="bottom-end">
 							<MenuHandler>
-								<Button
-									variant="text"
-									color="blue-gray"
-									className="flex items-center gap-1 rounded-full py-0.5 pl-0.5 pr-2 lg:ml-auto">
-									<Avatar
-										variant="circular"
-										size="sm"
-										alt="candice wu"
-										className="border border-blue-500 p-0.5"
-										src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-									/>
-									<ChevronDownIcon
-										strokeWidth={2.5}
-										className={`h-3 w-3 transition-transform ${
-											isMenuOpen ? 'rotate-180' : ''
-										}`}
-									/>
-								</Button>
+								<div className="group relative flex justify-center">
+									<Button
+										variant="text"
+										color="blue-gray"
+										className="flex items-center gap-1 rounded-full py-0.5 pl-0.5 pr-2 lg:ml-auto">
+										<Avatar
+											variant="circular"
+											size="sm"
+											alt="candice wu"
+											className="border border-blue-500 p-0.5"
+											src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+										/>
+										<ChevronDownIcon
+											strokeWidth={2.5}
+											className={`h-3 w-3 transition-transform ${
+												isMenuOpen ? 'rotate-180' : ''
+											}`}
+										/>
+									</Button>
+									<span className="absolute right-16 top-1 w-40 scale-0 rounded bg-gray-800 bg-opacity-90 p-2 text-xs font-medium text-white shadow-lg transition-all group-hover:scale-100">
+										User Name
+									</span>
+								</div>
 							</MenuHandler>
 							<MenuList className="p-1">
 								{/* USER */}
-								<NavMenuLink path="/toys">
-									<AiOutlineUser /> Profile
-								</NavMenuLink>
+								<Link to="/" className="outline-none">
+									<MenuItem onClick={closeMenu} className="rounded">
+										<Typography
+											as="span"
+											variant="small"
+											className="flex items-center gap-2 font-medium">
+											<AiOutlineUser /> Profile
+										</Typography>
+									</MenuItem>
+								</Link>
 
 								{/* MY TOYS */}
-								<NavMenuLink path="/toys">
-									<AiOutlineBug /> My Toys
-								</NavMenuLink>
+								<Link to="/" className="outline-none">
+									<MenuItem onClick={closeMenu} className="rounded">
+										<Typography
+											as="span"
+											variant="small"
+											className="flex items-center gap-2 font-medium">
+											<AiOutlineBug /> My Toys
+										</Typography>
+									</MenuItem>
+								</Link>
 
 								{/* ADD TOYS */}
-								<NavMenuLink path="/blogs">
-									<AiOutlinePlusCircle /> Add Toy
-								</NavMenuLink>
+								<Link to="/" className="outline-none">
+									<MenuItem onClick={closeMenu} className="rounded">
+										<Typography
+											as="span"
+											variant="small"
+											className="flex items-center gap-2 font-medium">
+											<AiOutlinePlusCircle /> Add Toys
+										</Typography>
+									</MenuItem>
+								</Link>
 
 								{/* SIGN OUT */}
 								<MenuItem

@@ -6,29 +6,43 @@ import {
 	Typography,
 	Button,
 } from '@material-tailwind/react';
+import { Rating } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css';
+import { Link } from 'react-router-dom';
 
-const ToyCard = () => {
+const ToyCard = ({ toy }) => {
+	const { _id, photo, name, price, ratings } = toy;
+
 	return (
-		<Card className="mt-6 w-96">
-			<CardHeader color="blue-gray" className="relative h-56">
-				<img
-					src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-					alt="img-blur-shadow"
-					layout="fill"
-				/>
+		<Card
+			variant="gradient"
+			color="white"
+			className="mt-12 flex w-full flex-col justify-between border">
+			<CardHeader color="blue-gray" className="relative h-48 bg-black">
+				<img src={photo} alt={name} className=" object-cover" />
 			</CardHeader>
-			<CardBody>
-				<Typography variant="h5" color="blue-gray" className="mb-2">
-					UI/UX Review Check
-				</Typography>
-				<Typography>
-					The place is close to Barceloneta Beach and bus stop just 2 min by
-					walk and near to &quot;Naviglio&quot; where you can enjoy the main
-					night life in Barcelona.
+			<CardBody className="pb-0">
+				<Typography
+					color="blue-gray"
+					className="mb-2 font-cursive text-lg tracking-wider">
+					{name}
 				</Typography>
 			</CardBody>
 			<CardFooter className="pt-0">
-				<Button>Read More</Button>
+				<div className="mb-4 items-center justify-between gap-4 sm:flex">
+					<Typography className="text-base font-semibold">
+						Price: ${price}
+					</Typography>
+					<div className="my-2 flex gap-2 font-semibold">
+						<Rating style={{ maxWidth: 80 }} value={ratings} readOnly />
+						<span>{ratings}</span>
+					</div>
+				</div>
+				<Link to={`/toy/${_id}`}>
+					<Button variant="gradient" color="lime" size="md" fullWidth>
+						View Details
+					</Button>
+				</Link>
 			</CardFooter>
 		</Card>
 	);
