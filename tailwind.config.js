@@ -7,7 +7,6 @@ module.exports = withMT({
 		fontFamily: {
 			primary: ['Secular One', 'sans-serif'],
 			secondary: ['Carter One', 'cursive'],
-			accent: ['Monoton', 'cursive'],
 		},
 	},
 	plugins: [],
