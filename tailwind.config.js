@@ -3,10 +3,17 @@ const withMT = require('@material-tailwind/react/utils/withMT');
 module.exports = withMT({
 	content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
 	theme: {
-		extend: {},
 		fontFamily: {
-			primary: ['Secular One', 'sans-serif'],
-			secondary: ['Carter One', 'cursive'],
+			sans: ['Ubuntu', 'sans-serif'],
+			cursive: ['Carter One', 'cursive'],
+		},
+		extend: {
+			colors: {
+				dark: {
+					800: '#202020',
+					900: '#000000',
+				},
+			},
 		},
 	},
 	plugins: [],

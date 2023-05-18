@@ -1,8 +1,11 @@
+import ShopByCategory from '../components/ShopByCategory';
+
 const Home = () => {
 	return (
-		<div>
-			<h2>Home</h2>
-		</div>
+		<main>
+			{/* SHOP BY CATEGORY */}
+			<ShopByCategory />
+		</main>
 	);
 };
 
