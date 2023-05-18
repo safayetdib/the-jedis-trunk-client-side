@@ -1,54 +1,48 @@
-import {
-	Tabs,
-	TabsHeader,
-	TabsBody,
-	Tab,
-	TabPanel,
-} from '@material-tailwind/react';
 import { useEffect, useState } from 'react';
-import ToyCard from './ToyCard';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 const ShopByCategory = () => {
-	const [toysData, setToysData] = useState([]);
 	const [categories, setCategories] = useState([]);
+	const [selectedCategory, setSelectedCategory] = useState('Action Figures');
+	const [toysData, setToysData] = useState([]);
 
+	// get category names
 	useEffect(() => {
-		fetch(`https://the-jedis-trunk-server-side.vercel.app/toys`)
+		fetch(`http://localhost:5000/categories`)
 			.then((res) => res.json())
-			.then((data) => {
-				setToysData(data);
-				setCategories(
-					Array.from(new Set(data.map(({ category }) => category)))
-				);
-			});
+			.then((data) => setCategories(data));
 	}, []);
 
-	console.log(categories);
+	// get toys data by category name
+	useEffect(() => {
+		fetch(`http://localhost:5000/toys/category/${selectedCategory}`)
+			.then((res) => res.json())
+			.then((data) => setToysData(data));
+	}, [selectedCategory]);
+
+	const handleCategory = (name) => {
+		setSelectedCategory(name);
+	};
 
 	return (
 		<section className="mx-auto max-w-7xl px-4">
-			<Tabs id="custom-animation" value="1">
-				<TabsHeader>
-					{categories.map((category, idx) => (
-						<Tab key={idx} value={category}>
-							{category}
+			<Tabs>
+				<TabList>
+					{categories.map(({ _id, name }) => (
+						<Tab key={_id} onClick={() => handleCategory(name)}>
+							{name}
 						</Tab>
 					))}
-				</TabsHeader>
-				<TabsBody
-					animate={{
-						initial: { y: 250 },
-						mount: { y: 0 },
-						unmount: { y: 250 },
-					}}>
-					{categories.map((category, idx) => (
-						<TabPanel key={idx} value={category}>
-							{toysData.map((toy, idx) => (
-								<ToyCard key={idx} toy={toy} />
-							))}
-						</TabPanel>
-					))}
-				</TabsBody>
+				</TabList>
+
+				{categories.map(({ _id }) => (
+					<TabPanel key={_id}>
+						{toysData.map(({ _id, name }) => (
+							<h2 key={_id}>{name}</h2>
+						))}
+					</TabPanel>
+				))}
 			</Tabs>
 		</section>
 	);

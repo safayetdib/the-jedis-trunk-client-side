@@ -75,7 +75,7 @@ const Footer = () => {
 					<div>
 						{/* logo */}
 						<Link to="/">
-							<Typography className="flex cursor-pointer items-center gap-2 py-1.5 font-cursive">
+							<Typography className="flex cursor-pointer items-center gap-2 py-1.5 font-cursive text-gray-900 hover:text-gray-800">
 								<FaJedi className="text-3xl sm:text-5xl" />
 								<span className="flex flex-col">
 									<span className="text-base sm:text-xl">
@@ -87,7 +87,7 @@ const Footer = () => {
 								</span>
 							</Typography>
 						</Link>
-						<p className="mt-3 max-w-sm text-xs opacity-90">
+						<p className="mt-3 max-w-sm text-xs font-medium">
 							Explore a galaxy of Star Wars toys and collectibles, where
 							enthusiasts come together to find their favorite characters,
 							ships, and lightsabers from a galaxy far, far away.
@@ -99,7 +99,7 @@ const Footer = () => {
 								<Typography
 									variant="small"
 									color="blue-gray"
-									className="mb-3 font-bold opacity-90">
+									className="mb-3 font-cursive">
 									{title}
 								</Typography>
 								{items.map((item, idx) => (
@@ -107,7 +107,7 @@ const Footer = () => {
 										<Link to={item.path}>
 											<Typography
 												color="gray"
-												className="py-1.5 text-sm font-normal transition-colors hover:text-blue-gray-900">
+												className="py-1.5 text-sm font-medium text-black opacity-90 transition-colors hover:underline">
 												{item.title}
 											</Typography>
 										</Link>
@@ -120,16 +120,19 @@ const Footer = () => {
 				<div className="mt-12 flex w-full flex-col items-center justify-center border-t border-gray-700 py-4 md:flex-row md:justify-between">
 					<Typography
 						variant="small"
-						className="mb-4 text-center font-normal text-blue-gray-900 md:mb-0">
-						&copy; {currentYear} <Link to="/">The Jedi&apos;s Trunk</Link>. All
-						Rights Reserved.
+						className="mb-4 text-center font-cursive text-blue-gray-800 md:mb-0">
+						&copy; {currentYear}{' '}
+						<Link to="/" className="hover:underline">
+							The Jedi&apos;s Trunk
+						</Link>
+						. All Rights Reserved.
 					</Typography>
 					<div className="flex gap-4 text-blue-gray-900 sm:justify-center">
 						<Typography
 							as="a"
 							href="https://www.facebook.com/"
 							target="_blank"
-							className="opacity-80 transition-opacity hover:opacity-100">
+							className="opacity-90 transition-opacity hover:opacity-100">
 							<svg
 								className="h-5 w-5"
 								fill="currentColor"
@@ -163,7 +166,7 @@ const Footer = () => {
 							as="a"
 							href="https://www.twitter.com/"
 							target="_blank"
-							className="opacity-80 transition-opacity hover:opacity-100">
+							className="opacity-90 transition-opacity hover:opacity-100">
 							<svg
 								className="h-5 w-5"
 								fill="currentColor"
@@ -176,7 +179,7 @@ const Footer = () => {
 							as="a"
 							href="https://www.github.com/"
 							target="_blank"
-							className="opacity-80 transition-opacity hover:opacity-100">
+							className="opacity-90 transition-opacity hover:opacity-100">
 							<svg
 								className="h-5 w-5"
 								fill="currentColor"
@@ -193,7 +196,7 @@ const Footer = () => {
 							as="a"
 							href="https://www.slack.com/"
 							target="_blank"
-							className="opacity-80 transition-opacity hover:opacity-100">
+							className="opacity-90 transition-opacity hover:opacity-100">
 							<svg
 								className="h-5 w-5"
 								fill="currentColor"
