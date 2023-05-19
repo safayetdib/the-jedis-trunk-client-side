@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import ErrorPage from '../pages/ErrorPage';
 import ToyDetails from '../pages/ToyDetails';
 import AllToys from '../pages/AllToys';
+import MyToys from '../pages/MyToys';
 
 const router = createBrowserRouter([
 	{
@@ -16,14 +17,20 @@ const router = createBrowserRouter([
 				element: <Home />,
 			},
 			{
+				path: '/toys',
+				element: <AllToys />,
+				loader: () => fetch(`http://localhost:5000/toys`),
+			},
+			{
 				path: '/toy/:id',
 				element: <ToyDetails />,
 				loader: ({ params }) => fetch(`http://localhost:5000/toy/${params.id}`),
 			},
 			{
-				path: '/toys',
-				element: <AllToys />,
-				loader: () => fetch(`http://localhost:5000/toys`),
+				path: '/toys/:seller',
+				element: <MyToys />,
+				loader: ({ params }) =>
+					fetch(`http://localhost:5000/toys/${params.seller}`),
 			},
 		],
 	},

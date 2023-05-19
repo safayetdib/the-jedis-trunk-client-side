@@ -22,7 +22,7 @@ const ToyCard = ({ toy }) => {
 				floated={false}
 				color="blue-gray"
 				className="relative h-60 bg-black">
-				<img src={photo} alt={name} className=" object-cover" />
+				<img src={photo} alt={name} className="h-full w-full  object-cover" />
 			</CardHeader>
 			<CardBody className="pb-0">
 				<Typography

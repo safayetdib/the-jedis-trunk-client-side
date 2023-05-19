@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
 	Navbar,
 	Typography,
@@ -26,6 +26,7 @@ import { MdOutlineAppRegistration, MdOutlineSmartToy } from 'react-icons/md';
 import { HiBars3, HiXMark } from 'react-icons/hi2';
 import NavMenuLink from '../../components/NavMenuLink';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { AuthContext } from '../../context/AuthProvider';
 
 const Header = () => {
 	const [isNavOpen, setIsNavOpen] = useState(false);
@@ -41,8 +42,12 @@ const Header = () => {
 		);
 	}, []);
 
+	const user = useContext(AuthContext);
+
+	console.log(user.user);
+
 	return (
-		<header className="my-3 px-2">
+		<header className="my-4 px-2">
 			<Navbar
 				color="lime"
 				variant="gradient"
@@ -79,6 +84,16 @@ const Header = () => {
 								{/* BLOGS */}
 								<NavMenuLink path="/blogs">
 									<AiOutlineAccountBook /> Blogs
+								</NavMenuLink>
+
+								{/* MY TOYS */}
+								<NavMenuLink path={`/toys/${user.user}`}>
+									<AiOutlineBug /> My Toys
+								</NavMenuLink>
+
+								{/* ADD TOYS */}
+								<NavMenuLink path={`/toy/add`}>
+									<AiOutlinePlusCircle /> Add Toys
 								</NavMenuLink>
 
 								{/* LOGIN */}
@@ -146,30 +161,6 @@ const Header = () => {
 									</MenuItem>
 								</Link>
 
-								{/* MY TOYS */}
-								<Link to="/" className="outline-none">
-									<MenuItem onClick={closeMenu} className="rounded">
-										<Typography
-											as="span"
-											variant="small"
-											className="flex items-center gap-2 font-medium">
-											<AiOutlineBug /> My Toys
-										</Typography>
-									</MenuItem>
-								</Link>
-
-								{/* ADD TOYS */}
-								<Link to="/" className="outline-none">
-									<MenuItem onClick={closeMenu} className="rounded">
-										<Typography
-											as="span"
-											variant="small"
-											className="flex items-center gap-2 font-medium">
-											<AiOutlinePlusCircle /> Add Toys
-										</Typography>
-									</MenuItem>
-								</Link>
-
 								{/* SIGN OUT */}
 								<MenuItem
 									onClick={closeMenu}
@@ -198,6 +189,16 @@ const Header = () => {
 						{/* ALL TOYS */}
 						<NavMenuLink path="/toys">
 							<MdOutlineSmartToy /> All Toys
+						</NavMenuLink>
+
+						{/* MY TOYS */}
+						<NavMenuLink path={`/toys/${user.user}`}>
+							<AiOutlineBug /> My Toys
+						</NavMenuLink>
+
+						{/* ADD TOYS */}
+						<NavMenuLink path={`/toy/add`}>
+							<AiOutlinePlusCircle /> Add Toys
 						</NavMenuLink>
 
 						{/* BLOGS */}
