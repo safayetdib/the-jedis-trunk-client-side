@@ -1,6 +1,6 @@
 import { useRouteError } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import droid from '/assets/error.png';
+import darth from '/assets/error.png';
 import { Button } from '@material-tailwind/react';
 import { RiAlarmWarningFill } from 'react-icons/ri';
 
@@ -8,8 +8,8 @@ const ErrorPage = () => {
 	const { error, status } = useRouteError();
 
 	return (
-		<section className="flex min-h-screen flex-col items-center justify-center gap-6 bg-gray-100 p-4 text-center text-gray-800">
-			<img src={droid} alt="" className="h-80 object-cover" />
+		<section className="flex min-h-screen flex-col items-center justify-center gap-6 bg-black bg-opacity-60 p-4 text-center text-white">
+			<img src={darth} alt="" className="max-w-sm object-cover" />
 			<h2 className="font-cursive text-5xl font-extrabold">
 				<span className="sr-only">Error</span> Error: {status || 404}
 			</h2>

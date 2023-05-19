@@ -42,7 +42,7 @@ const Header = () => {
 	}, []);
 
 	return (
-		<header className="p-2">
+		<header className="my-3 px-2">
 			<Navbar
 				color="lime"
 				variant="gradient"

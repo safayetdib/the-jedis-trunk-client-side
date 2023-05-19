@@ -17,8 +17,11 @@ const ToyCard = ({ toy }) => {
 		<Card
 			variant="gradient"
 			color="white"
-			className="mt-12 flex w-full flex-col justify-between border">
-			<CardHeader color="blue-gray" className="relative h-48 bg-black">
+			className="flex w-full flex-col justify-between border">
+			<CardHeader
+				floated={false}
+				color="blue-gray"
+				className="relative h-60 bg-black">
 				<img src={photo} alt={name} className=" object-cover" />
 			</CardHeader>
 			<CardBody className="pb-0">

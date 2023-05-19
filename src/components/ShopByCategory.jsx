@@ -29,14 +29,19 @@ const ShopByCategory = () => {
 
 	return (
 		<section className="mx-auto max-w-7xl px-4">
-			<Typography variant="h3" color="blue-gray" className="my-10 text-center">
-				Shop By Category
-			</Typography>
+			<div className="mb-4 mt-10 bg-black bg-opacity-70 py-4">
+				<Typography variant="h3" color="white" className="text-center">
+					Shop By Category
+				</Typography>
+			</div>
 
-			<Tabs>
-				<TabList>
+			<Tabs selectedTabClassName="bg-black text-white border-4 border-gray-700">
+				<TabList className="flex-center flex-col gap-2 rounded-xl bg-lime-500 p-2 text-center font-cursive text-xs text-black transition sm:flex-row sm:text-sm">
 					{categories.map(({ _id, name }) => (
-						<Tab key={_id} onClick={() => handleCategory(name)}>
+						<Tab
+							className="w-full cursor-pointer rounded-xl border-2 border-gray-700 px-4 py-1 outline-none hover:bg-black hover:text-white sm:w-fit"
+							key={_id}
+							onClick={() => handleCategory(name)}>
 							{name}
 						</Tab>
 					))}
@@ -44,7 +49,7 @@ const ShopByCategory = () => {
 
 				{categories.map(({ _id }) => (
 					<TabPanel key={_id}>
-						<div className="grid grid-cols-1 justify-items-center gap-4 py-2 md:grid-cols-2 lg:grid-cols-3">
+						<div className="mt-4 grid grid-cols-1 justify-items-center gap-4 py-2 md:grid-cols-2 lg:grid-cols-3">
 							{toysData.map((toy) => (
 								<ToyCard key={toy._id} toy={toy} />
 							))}
