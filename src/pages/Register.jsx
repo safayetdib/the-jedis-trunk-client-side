@@ -8,6 +8,7 @@ import { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
 import Loading from '../components/Loading';
+import { Toaster, toast } from 'react-hot-toast';
 
 const Register = () => {
 	const { createUser, signIn, updateUserData, signInWithGoogle, logout } =
@@ -23,6 +24,20 @@ const Register = () => {
 	// ERRORS
 	const [error, setError] = useState('');
 	const [passError, setPassError] = useState('');
+
+	const notify = () => {
+		toast.success('Registered Successfully', {
+			style: {
+				border: '1px solid #f40000',
+				padding: '16px',
+				color: '#f40000',
+			},
+			iconTheme: {
+				primary: '#f40000',
+				secondary: '#FFFAEE',
+			},
+		});
+	};
 
 	// HANDLE REGISTER
 	const handleRegister = (e) => {
@@ -46,7 +61,10 @@ const Register = () => {
 
 		createUser(email, password)
 			.then(() => {
-				updateNameAndPhoto(name, photo);
+				updateUserData(name, photo).then(() => {
+					navigate(from, { replace: true });
+					notify();
+				});
 				logout();
 				signIn(email, password);
 
@@ -54,6 +72,7 @@ const Register = () => {
 				setError('');
 				setIsLoading(false);
 				navigate(from, { replace: true });
+				notify();
 			})
 			.catch((err) => {
 				setError(err.message);
@@ -65,15 +84,10 @@ const Register = () => {
 		signInWithGoogle()
 			.then(() => {
 				setError('');
+				notify();
 				navigate(from, { replace: true });
 			})
 			.catch((err) => setError(err.message));
-	};
-
-	const updateNameAndPhoto = (name, url) => {
-		updateUserData(name, url).then(() => {
-			navigate('/');
-		});
 	};
 
 	return (
@@ -150,6 +164,8 @@ const Register = () => {
 						fullWidth>
 						{!isLoading ? 'Submit' : <Loading />}
 					</Button>
+
+					<Toaster />
 
 					<div className="relative mt-6">
 						<span className="block h-px w-full bg-gray-300"></span>

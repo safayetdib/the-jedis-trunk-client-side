@@ -27,6 +27,7 @@ import { HiBars3, HiXMark } from 'react-icons/hi2';
 import NavMenuLink from '../../components/NavMenuLink';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { AuthContext } from '../../context/AuthProvider';
+import { Toaster, toast } from 'react-hot-toast';
 
 const Header = () => {
 	const [isNavOpen, setIsNavOpen] = useState(false);
@@ -42,9 +43,28 @@ const Header = () => {
 		);
 	}, []);
 
-	const user = useContext(AuthContext);
+	const notify = () => {
+		toast.success(`You've logged out!`, {
+			style: {
+				border: '1px solid #713200',
+				padding: '16px',
+				color: '#713200',
+			},
+			iconTheme: {
+				primary: '#713200',
+				secondary: '#FFFAEE',
+			},
+		});
+	};
 
-	console.log(user.user);
+	const { user, logout } = useContext(AuthContext);
+
+	const handleSignOut = () => {
+		logout().then(() => {
+			notify();
+		});
+		closeMenu();
+	};
 
 	return (
 		<header className="my-4 px-2">
@@ -68,7 +88,7 @@ const Header = () => {
 						</Typography>
 					</Link>
 
-					<div className="flex items-center gap-4 pr-4">
+					<div className="flex items-center gap-2 pr-4 sm:gap-4">
 						<div className="hidden lg:block">
 							<ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
 								{/* HOME */}
@@ -86,27 +106,100 @@ const Header = () => {
 									<AiOutlineAccountBook /> Blogs
 								</NavMenuLink>
 
-								{/* MY TOYS */}
-								<NavMenuLink path={`/toys/${user.user}`}>
-									<AiOutlineBug /> My Toys
-								</NavMenuLink>
+								{user ? (
+									<>
+										{/* MY TOYS */}
+										<NavMenuLink path={`/toys/${user.user}`}>
+											<AiOutlineBug /> My Toys
+										</NavMenuLink>
 
-								{/* ADD TOYS */}
-								<NavMenuLink path={`/toy/add`}>
-									<AiOutlinePlusCircle /> Add Toys
-								</NavMenuLink>
+										{/* ADD TOYS */}
+										<NavMenuLink path={`/toy/add`}>
+											<AiOutlinePlusCircle /> Add Toy
+										</NavMenuLink>
+									</>
+								) : (
+									<>
+										{/* LOGIN */}
+										<NavMenuLink path="/login">
+											<AiOutlineLogin /> Login
+										</NavMenuLink>
 
-								{/* LOGIN */}
-								<NavMenuLink path="/login">
-									<AiOutlineLogin /> Login
-								</NavMenuLink>
-
-								{/* REGISTER */}
-								<NavMenuLink path="/register">
-									<MdOutlineAppRegistration /> Register
-								</NavMenuLink>
+										{/* REGISTER */}
+										<NavMenuLink path="/register">
+											<MdOutlineAppRegistration /> Register
+										</NavMenuLink>
+									</>
+								)}
 							</ul>
 						</div>
+
+						{/* Logged In User Menu */}
+						{user && (
+							<Menu
+								open={isMenuOpen}
+								handler={setIsMenuOpen}
+								placement="bottom-end">
+								<MenuHandler>
+									<div className="group relative flex justify-center">
+										<Button
+											variant="text"
+											color="blue-gray"
+											className="flex items-center gap-1 rounded-full py-0.5 pl-0.5 pr-2 lg:ml-auto">
+											<Avatar
+												variant="circular"
+												size="sm"
+												alt="candice wu"
+												className="border border-blue-500 p-0.5"
+												src={
+													(user && user.photoURL) ||
+													'https://cdn.pixabay.com/photo/2016/05/12/00/48/star-wars-1386790_960_720.png'
+												}
+											/>
+											<ChevronDownIcon
+												strokeWidth={2.5}
+												className={`h-3 w-3 transition-transform ${
+													isMenuOpen ? 'rotate-180' : ''
+												}`}
+											/>
+										</Button>
+										{user && (
+											<span className="absolute right-16 top-1 w-40 scale-0 rounded bg-gray-800 bg-opacity-90 p-2 text-center text-xs font-medium text-white shadow-lg transition-all group-hover:scale-100">
+												{user?.displayName}
+											</span>
+										)}
+									</div>
+								</MenuHandler>
+								<MenuList className="p-1">
+									{/* USER */}
+									<Link to="/" className="outline-none">
+										<MenuItem onClick={closeMenu} className="rounded">
+											<Typography
+												as="span"
+												variant="small"
+												className="flex items-center gap-2 font-medium">
+												<AiOutlineUser /> Profile
+											</Typography>
+										</MenuItem>
+									</Link>
+
+									{/* SIGN OUT */}
+									<MenuItem
+										onClick={handleSignOut}
+										className="rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10">
+										<Typography
+											as="span"
+											variant="small"
+											className="flex items-center gap-2 font-medium"
+											color="red">
+											<AiOutlinePoweroff /> Sign Out
+										</Typography>
+									</MenuItem>
+
+									<Toaster />
+								</MenuList>
+							</Menu>
+						)}
 
 						{/* Small Device : Menu Toggle Button */}
 						<IconButton
@@ -114,67 +207,9 @@ const Header = () => {
 							color="blue-gray"
 							variant="text"
 							onClick={toggleIsNavOpen}
-							className="ml-auto text-2xl text-black lg:hidden">
+							className="text-2xl text-black lg:hidden">
 							{isNavOpen ? <HiXMark /> : <HiBars3 />}
 						</IconButton>
-
-						{/* Logged In User Menu */}
-						<Menu
-							open={isMenuOpen}
-							handler={setIsMenuOpen}
-							placement="bottom-end">
-							<MenuHandler>
-								<div className="group relative flex justify-center">
-									<Button
-										variant="text"
-										color="blue-gray"
-										className="flex items-center gap-1 rounded-full py-0.5 pl-0.5 pr-2 lg:ml-auto">
-										<Avatar
-											variant="circular"
-											size="sm"
-											alt="candice wu"
-											className="border border-blue-500 p-0.5"
-											src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-										/>
-										<ChevronDownIcon
-											strokeWidth={2.5}
-											className={`h-3 w-3 transition-transform ${
-												isMenuOpen ? 'rotate-180' : ''
-											}`}
-										/>
-									</Button>
-									<span className="absolute right-16 top-1 w-40 scale-0 rounded bg-gray-800 bg-opacity-90 p-2 text-xs font-medium text-white shadow-lg transition-all group-hover:scale-100">
-										User Name
-									</span>
-								</div>
-							</MenuHandler>
-							<MenuList className="p-1">
-								{/* USER */}
-								<Link to="/" className="outline-none">
-									<MenuItem onClick={closeMenu} className="rounded">
-										<Typography
-											as="span"
-											variant="small"
-											className="flex items-center gap-2 font-medium">
-											<AiOutlineUser /> Profile
-										</Typography>
-									</MenuItem>
-								</Link>
-
-								{/* SIGN OUT */}
-								<MenuItem
-									onClick={closeMenu}
-									className="rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10">
-									<Typography
-										as="span"
-										variant="small"
-										className="flex items-center gap-2 font-medium"
-										color="red">
-										<AiOutlinePoweroff /> Sign Out
-									</Typography>
-								</MenuItem>
-							</MenuList>
-						</Menu>
 					</div>
 				</div>
 
@@ -191,30 +226,36 @@ const Header = () => {
 							<MdOutlineSmartToy /> All Toys
 						</NavMenuLink>
 
-						{/* MY TOYS */}
-						<NavMenuLink path={`/toys/${user.user}`}>
-							<AiOutlineBug /> My Toys
-						</NavMenuLink>
-
-						{/* ADD TOYS */}
-						<NavMenuLink path={`/toy/add`}>
-							<AiOutlinePlusCircle /> Add Toys
-						</NavMenuLink>
-
 						{/* BLOGS */}
 						<NavMenuLink path="/blogs">
 							<AiOutlineAccountBook /> Blogs
 						</NavMenuLink>
 
-						{/* LOGIN */}
-						<NavMenuLink path="/login">
-							<AiOutlineLogin /> Login
-						</NavMenuLink>
+						{user ? (
+							<>
+								{/* MY TOYS */}
+								<NavMenuLink path={`/toys/${user.user}`}>
+									<AiOutlineBug /> My Toys
+								</NavMenuLink>
 
-						{/* REGISTER */}
-						<NavMenuLink path="/register">
-							<MdOutlineAppRegistration /> Register
-						</NavMenuLink>
+								{/* ADD TOYS */}
+								<NavMenuLink path={`/toy/add`}>
+									<AiOutlinePlusCircle /> Add Toys
+								</NavMenuLink>
+							</>
+						) : (
+							<>
+								{/* LOGIN */}
+								<NavMenuLink path="/login">
+									<AiOutlineLogin /> Login
+								</NavMenuLink>
+
+								{/* REGISTER */}
+								<NavMenuLink path="/register">
+									<MdOutlineAppRegistration /> Register
+								</NavMenuLink>
+							</>
+						)}
 					</ul>
 				</Collapse>
 			</Navbar>
