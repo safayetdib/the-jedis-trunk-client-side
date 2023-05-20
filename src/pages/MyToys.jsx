@@ -4,16 +4,18 @@ import {
 	Dialog,
 	DialogBody,
 	DialogFooter,
-	DialogHeader,
 	Input,
+	Option,
+	Select,
 	Typography,
 } from '@material-tailwind/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
-import { Link, useParams } from 'react-router-dom';
+import { AiFillEdit, AiFillDelete, AiOutlineWarning } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 import { Toaster, toast } from 'react-hot-toast';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
+import UpdateToyData from '../components/UpdateToyData';
 
 const TABLE_HEAD = [
 	'No.',
@@ -28,30 +30,70 @@ const TABLE_HEAD = [
 ];
 
 const MyToys = () => {
-	const [myToys, setMyToys] = useState([]);
-	const [openDltModal, setOpenDltModal] = useState(false);
-	const [toyId, setToyId] = useState();
 	const { user } = useContext(AuthContext);
 	const seller_email = user?.email;
 
+	const [myToys, setMyToys] = useState([]);
+	const [toyData, setToyData] = useState();
+	const [toyId, setToyId] = useState();
+
+	const [openUpdateModal, setOpenUpdateModal] = useState(false);
+	const [openDltModal, setOpenDltModal] = useState(false);
+	const [isSuccessful, setIsSuccessful] = useState(false);
+	const [isAscending, setIsAscending] = useState(true);
+
+	let sort;
+	if (isAscending) {
+		sort = 1;
+	} else {
+		sort = -1;
+	}
+
 	useEffect(() => {
-		fetch(`http://localhost:5000/my-toys?email=${seller_email}`)
+		fetch(`http://localhost:5000/my-toys?email=${seller_email}&sort=${sort}`)
 			.then((res) => res.json())
 			.then((data) => {
 				setMyToys(data);
 			});
-	}, [seller_email]);
+	}, [seller_email, isSuccessful, sort]);
 
 	const TABLE_ROWS = myToys;
 
-	const handleUpdate = (id) => {};
+	// handle update
+	const handleUpdate = (data) => {
+		setOpenUpdateModal((cur) => !cur);
+		setToyData(data);
+	};
+	const handleUpdateConfirm = (id, data) => {
+		fetch(`http://localhost:5000/toy-update/${id}`, {
+			method: 'PATCH',
+			headers: {
+				'content-type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.success) {
+					setIsSuccessful(!isSuccessful);
+					toast.success(data.message);
+				} else {
+					toast.error(data.message);
+				}
+			});
+
+		console.log(data);
+		console.log(id);
+
+		setOpenUpdateModal(false);
+	};
 
 	// handle delete button
 	const handleDelete = (id) => {
 		setOpenDltModal((cur) => !cur);
 		setToyId(id);
+		console.log(id);
 	};
-
 	const handleDeleteConfirm = () => {
 		fetch(`http://localhost:5000/toy/${toyId}`, {
 			method: 'DELETE',
@@ -60,15 +102,15 @@ const MyToys = () => {
 			.then((data) => {
 				if (data.success) {
 					toast.success(data.message);
-					const remaining = myToys.filter((toy) => toy._id !== toyId);
-					setMyToys(remaining);
+					setIsSuccessful(!isSuccessful);
 				} else {
 					toast.error(data.message);
 				}
 			});
-
 		setOpenDltModal(false);
 	};
+
+	const closeUpdateModal = () => setOpenUpdateModal(false);
 
 	return (
 		<main className="mx-auto max-w-7xl px-2">
@@ -78,24 +120,39 @@ const MyToys = () => {
 					<h1 className="my-6 font-cursive text-4xl text-white md:m-0">
 						My Toys
 					</h1>
-					<form
-						onSubmit={(e) => {
-							e.preventDefault();
-							console.log(e.target.search.value);
-						}}
-						className="w-full sm:w-72">
-						<Input
-							name="search"
-							label="Search"
-							color="white"
-							icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-						/>
-					</form>
+					<div className="flex flex-col gap-2 sm:flex-row">
+						{/* search */}
+						<form
+							onSubmit={(e) => {
+								e.preventDefault();
+								console.log(e.target.search.value);
+							}}
+							className="w-full sm:w-72">
+							<Input
+								name="search"
+								label="Search"
+								color="white"
+								icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+							/>
+						</form>
+
+						{/* sort by price */}
+						<div>
+							<Select label="Sort" color="blue-gray" className="text-white">
+								<Option onClick={() => setIsAscending(true)}>
+									Price Low to High
+								</Option>
+								<Option onClick={() => setIsAscending(false)}>
+									Price High to Low
+								</Option>{' '}
+							</Select>
+						</div>
+					</div>
 				</div>
 			</Card>
 
-			{/* table */}
 			<Card className="h-full w-full overflow-auto">
+				{/* table */}
 				<table className="w-full min-w-max table-auto text-left">
 					<thead>
 						<tr>
@@ -114,78 +171,103 @@ const MyToys = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{TABLE_ROWS.map(
-							(
-								{
-									_id,
-									photo,
-									name,
-									description,
-									category,
-									ratings,
-									quantity,
-									price,
-								},
-								index
-							) => {
-								const isLast = index === TABLE_ROWS.length - 1;
-								const classes = isLast
-									? 'p-4 max-w-[200px]'
-									: 'p-4 border-b border-gray-500 max-w-[200px]';
+						{TABLE_ROWS.map((toyData, index) => {
+							const {
+								_id,
+								photo,
+								name,
+								description,
+								category,
+								ratings,
+								quantity,
+								price,
+							} = toyData;
 
-								return (
-									<tr key={index} className="bg-white text-black">
-										<td className={classes}>{index + 1}.</td>
-										<td className={classes}>
-											<img src={photo} alt={name} className="w-24" />
-										</td>
-										<td className={classes}>{name}</td>
-										<td className={classes}>
-											<p className="line-clamp-3">{description}</p>
-											<Link
-												to={`/toy/${_id}`}
-												className="text-sm text-gray-900 underline">
-												Read More
-											</Link>
-										</td>
-										<td className={classes}>{category}</td>
-										<td className={classes}>{ratings}</td>
-										<td className={classes}>{quantity}</td>
-										<td className={classes}>{price}</td>
-										{/* action buttons */}
-										<td className={classes}>
-											{/* update */}
-											<Button
-												onClick={() => handleUpdate(_id)}
-												color="lime"
-												variant="gradient"
-												title="Update"
-												className="mb-2 flex items-center gap-2"
-												fullWidth>
-												<AiFillEdit className="text-base" /> Update
-											</Button>
-											{/* delete */}
-											<Button
-												onClick={() => handleDelete(_id)}
-												color="red"
-												title="Delete"
-												className="flex items-center gap-2 bg-red-900 tracking-wide text-white"
-												fullWidth>
-												<AiFillDelete className="text-base" /> Delete
-											</Button>
-											<Toaster />
-										</td>
-									</tr>
-								);
-							}
-						)}
+							const isLast = index === TABLE_ROWS.length - 1;
+							const classes = isLast
+								? 'p-4 max-w-[200px]'
+								: 'p-4 border-b border-gray-500 max-w-[200px]';
+
+							return (
+								<tr key={index} className="bg-white text-black">
+									{/* serial no */}
+									<td className={classes}>{index + 1}.</td>
+									{/* photo */}
+									<td className={classes}>
+										<img src={photo} alt={name} className="w-24" />
+									</td>
+									{/* toy name */}
+									<td className={classes}>{name}</td>
+									{/* description */}
+									<td className={classes}>
+										<p className="line-clamp-3">{description}</p>
+										<Link
+											to={`/toy/${_id}`}
+											className="text-sm text-gray-900 underline">
+											Read More
+										</Link>
+									</td>
+									{/* category */}
+									<td className={classes}>{category}</td>
+									{/* ratings */}
+									<td className={classes}>{ratings}</td>
+									{/* quantity */}
+									<td className={classes}>{quantity}</td>
+									{/* price */}
+									<td className={classes}>{price}</td>
+									{/* action buttons */}
+									<td className={classes}>
+										{/* update */}
+										<Button
+											onClick={() => handleUpdate(toyData)}
+											color="lime"
+											variant="gradient"
+											title="Update"
+											className="mb-2 flex items-center gap-2"
+											fullWidth>
+											<AiFillEdit className="text-base" /> Update
+										</Button>
+										{/* delete */}
+										<Button
+											onClick={() => handleDelete(_id)}
+											color="red"
+											title="Delete"
+											className="flex items-center gap-2 bg-red-900 tracking-wide text-white"
+											fullWidth>
+											<AiFillDelete className="text-base" /> Delete
+										</Button>
+									</td>
+								</tr>
+							);
+						})}
 					</tbody>
 				</table>
 			</Card>
 
+			{/* update toy data modal */}
+			<Dialog
+				open={openUpdateModal}
+				handler={handleUpdate}
+				className="p-4"
+				size="md">
+				<UpdateToyData
+					toyData={toyData}
+					closeUpdateModal={closeUpdateModal}
+					handleUpdateConfirm={handleUpdateConfirm}
+				/>
+			</Dialog>
+
+			{/* delete confirm modal */}
 			<Dialog open={openDltModal} handler={handleDelete}>
-				<DialogHeader>Its a simple dialog.</DialogHeader>
-				<DialogBody divider>Lorem, ipsum dolor sit</DialogBody>
+				<DialogBody className="rounded-t-xl text-center" divider>
+					<h2 className="mt-4 font-cursive text-2xl text-black">
+						Are you sure you want to delete this item?
+					</h2>
+					<h6 className="flex-center mt-4 gap-2 text-base font-semibold text-red-900">
+						<AiOutlineWarning className="text-xl" /> This action cannot be
+						undone!
+					</h6>
+				</DialogBody>
 				<DialogFooter>
 					<Button
 						onClick={() => setOpenDltModal(false)}
@@ -194,14 +276,18 @@ const MyToys = () => {
 						className="mr-1">
 						<span>Cancel</span>
 					</Button>
-					<Button
-						onClick={handleDeleteConfirm}
-						variant="gradient"
-						color="green">
+					<Button onClick={handleDeleteConfirm} variant="gradient" color="lime">
 						<span>Delete</span>
 					</Button>
 				</DialogFooter>
 			</Dialog>
+			{/* toast */}
+			<Toaster
+				position="top-center"
+				toastOptions={{
+					duration: 4000,
+				}}
+			/>
 		</main>
 	);
 };

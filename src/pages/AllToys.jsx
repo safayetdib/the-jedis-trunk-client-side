@@ -1,6 +1,14 @@
-import { Button, Card, Input, Typography } from '@material-tailwind/react';
+import {
+	Button,
+	Card,
+	Input,
+	Option,
+	Select,
+	Typography,
+} from '@material-tailwind/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Link, useLoaderData } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const AllToys = () => {
 	const TABLE_HEAD = [
@@ -13,7 +21,28 @@ const AllToys = () => {
 		'Seller',
 		'',
 	];
-	const TABLE_ROWS = useLoaderData();
+	// const TABLE_ROWS = useLoaderData();
+
+	const [allData, setAllData] = useState([]);
+	const [isAscending, setIsAscending] = useState(true);
+
+	const TABLE_ROWS = allData;
+
+	let sort;
+	if (isAscending) {
+		sort = 1;
+	} else {
+		sort = -1;
+	}
+
+	useEffect(() => {
+		fetch(`http://localhost:5000/toys?sort=${sort}`)
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				setAllData(data);
+			});
+	}, [sort]);
 
 	return (
 		<main className="mx-auto max-w-7xl px-2">
@@ -22,19 +51,34 @@ const AllToys = () => {
 					<h1 className="my-4 font-cursive text-4xl text-white md:m-0">
 						All Toys
 					</h1>
-					<form
-						onSubmit={(e) => {
-							e.preventDefault();
-							console.log(e.target.search.value);
-						}}
-						className="w-full sm:w-72">
-						<Input
-							name="search"
-							label="Search"
-							color="white"
-							icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-						/>
-					</form>
+					<div className="flex flex-col gap-2 sm:flex-row">
+						{/* search */}
+						<form
+							onSubmit={(e) => {
+								e.preventDefault();
+								console.log(e.target.search.value);
+							}}
+							className="w-full sm:w-72">
+							<Input
+								name="search"
+								label="Search"
+								color="white"
+								icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+							/>
+						</form>
+
+						{/* sort by price */}
+						<div>
+							<Select label="Sort" color="blue-gray" className="text-white">
+								<Option onClick={() => setIsAscending(true)}>
+									Price Low to High
+								</Option>
+								<Option onClick={() => setIsAscending(false)}>
+									Price High to Low
+								</Option>{' '}
+							</Select>
+						</div>
+					</div>
 				</div>
 			</Card>
 

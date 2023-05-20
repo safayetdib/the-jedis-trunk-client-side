@@ -170,7 +170,7 @@ const Header = () => {
 										)}
 									</div>
 								</MenuHandler>
-								<MenuList className="p-1">
+								<MenuList className="overflow-auto p-1">
 									{/* USER */}
 									<Link to="/" className="outline-none">
 										<MenuItem className="rounded">

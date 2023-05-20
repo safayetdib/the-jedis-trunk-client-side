@@ -192,7 +192,22 @@ const AddToy = () => {
 										fullWidth>
 										Add
 									</Button>
-									<Toaster />
+									{/* toast */}
+									<Toaster
+										position="top-center"
+										toastOptions={{
+											duration: 3000,
+											style: {
+												border: '1px solid #32CD32',
+												padding: '16px',
+												color: '#32CD32',
+											},
+											iconTheme: {
+												primary: '#32CD32',
+												secondary: '#FFFAEE',
+											},
+										}}
+									/>
 								</div>
 							</form>
 						</div>

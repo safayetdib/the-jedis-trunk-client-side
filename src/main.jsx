@@ -6,9 +6,23 @@ import { RouterProvider } from 'react-router-dom';
 import router from './routes/Routes';
 import AuthProvider from './context/AuthProvider';
 
+const customTheme = {
+	dialog: {
+		styles: {
+			sizes: {
+				md: {
+					width: 'w-full sm:max-w-xl',
+					minWidth: 'min-w-[30%]',
+					maxWidth: 'max-w-[90%]',
+				},
+			},
+		},
+	},
+};
+
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
-		<ThemeProvider>
+		<ThemeProvider value={customTheme}>
 			<AuthProvider>
 				<RouterProvider router={router} />
 			</AuthProvider>
