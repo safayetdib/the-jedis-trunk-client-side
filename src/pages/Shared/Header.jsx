@@ -34,7 +34,7 @@ const Header = () => {
 	const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const closeMenu = () => setIsMenuOpen(false);
+	const closeMenu = () => setIsMenuOpen(!isMenuOpen);
 
 	React.useEffect(() => {
 		window.addEventListener(
@@ -109,12 +109,12 @@ const Header = () => {
 								{user ? (
 									<>
 										{/* MY TOYS */}
-										<NavMenuLink path={`/toys/${user.user}`}>
+										<NavMenuLink path="/my-toys">
 											<AiOutlineBug /> My Toys
 										</NavMenuLink>
 
 										{/* ADD TOYS */}
-										<NavMenuLink path={`/toy/add`}>
+										<NavMenuLink path="/add-toy">
 											<AiOutlinePlusCircle /> Add Toy
 										</NavMenuLink>
 									</>
@@ -149,7 +149,7 @@ const Header = () => {
 											<Avatar
 												variant="circular"
 												size="sm"
-												alt="candice wu"
+												alt={user && user?.displayName}
 												className="border border-blue-500 p-0.5"
 												src={
 													(user && user.photoURL) ||
@@ -173,7 +173,7 @@ const Header = () => {
 								<MenuList className="p-1">
 									{/* USER */}
 									<Link to="/" className="outline-none">
-										<MenuItem onClick={closeMenu} className="rounded">
+										<MenuItem className="rounded">
 											<Typography
 												as="span"
 												variant="small"
@@ -239,7 +239,7 @@ const Header = () => {
 								</NavMenuLink>
 
 								{/* ADD TOYS */}
-								<NavMenuLink path={`/toy/add`}>
+								<NavMenuLink path={`/add`}>
 									<AiOutlinePlusCircle /> Add Toys
 								</NavMenuLink>
 							</>

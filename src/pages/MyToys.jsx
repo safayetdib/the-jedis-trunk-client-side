@@ -1,26 +1,74 @@
-import { Button, Card, Input, Typography } from '@material-tailwind/react';
+import {
+	Button,
+	Card,
+	Dialog,
+	DialogBody,
+	DialogFooter,
+	DialogHeader,
+	Input,
+	Typography,
+} from '@material-tailwind/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { Toaster, toast } from 'react-hot-toast';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../context/AuthProvider';
+
+const TABLE_HEAD = [
+	'No.',
+	'Photo',
+	'Name',
+	'Description',
+	'Category',
+	'Rating',
+	'Quantity',
+	'Price',
+	'Actions',
+];
 
 const MyToys = () => {
-	const TABLE_HEAD = [
-		'No.',
-		'Photo',
-		'Name',
-		'Description',
-		'Category',
-		'Rating',
-		'Quantity',
-		'Price',
-		'Actions',
-	];
-	const TABLE_ROWS = useLoaderData();
+	const [myToys, setMyToys] = useState([]);
+	const [openDltModal, setOpenDltModal] = useState(false);
+	const [toyId, setToyId] = useState();
+	const { user } = useContext(AuthContext);
+	const seller_email = user?.email;
 
-	const handleUpdate = () => {};
+	useEffect(() => {
+		fetch(`http://localhost:5000/my-toys?email=${seller_email}`)
+			.then((res) => res.json())
+			.then((data) => {
+				setMyToys(data);
+			});
+	}, [seller_email]);
+
+	const TABLE_ROWS = myToys;
+
+	const handleUpdate = (id) => {};
 
 	// handle delete button
-	const handleDelete = () => {};
+	const handleDelete = (id) => {
+		setOpenDltModal((cur) => !cur);
+		setToyId(id);
+	};
+
+	const handleDeleteConfirm = () => {
+		fetch(`http://localhost:5000/toy/${toyId}`, {
+			method: 'DELETE',
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.success) {
+					toast.success(data.message);
+					const remaining = myToys.filter((toy) => toy._id !== toyId);
+					setMyToys(remaining);
+				} else {
+					toast.error(data.message);
+				}
+			});
+
+		setOpenDltModal(false);
+	};
 
 	return (
 		<main className="mx-auto max-w-7xl px-2">
@@ -108,7 +156,7 @@ const MyToys = () => {
 										<td className={classes}>
 											{/* update */}
 											<Button
-												onClick={handleUpdate}
+												onClick={() => handleUpdate(_id)}
 												color="lime"
 												variant="gradient"
 												title="Update"
@@ -118,13 +166,14 @@ const MyToys = () => {
 											</Button>
 											{/* delete */}
 											<Button
-												onClick={handleDelete}
+												onClick={() => handleDelete(_id)}
 												color="red"
 												title="Delete"
 												className="flex items-center gap-2 bg-red-900 tracking-wide text-white"
 												fullWidth>
 												<AiFillDelete className="text-base" /> Delete
 											</Button>
+											<Toaster />
 										</td>
 									</tr>
 								);
@@ -133,6 +182,26 @@ const MyToys = () => {
 					</tbody>
 				</table>
 			</Card>
+
+			<Dialog open={openDltModal} handler={handleDelete}>
+				<DialogHeader>Its a simple dialog.</DialogHeader>
+				<DialogBody divider>Lorem, ipsum dolor sit</DialogBody>
+				<DialogFooter>
+					<Button
+						onClick={() => setOpenDltModal(false)}
+						variant="text"
+						color="red"
+						className="mr-1">
+						<span>Cancel</span>
+					</Button>
+					<Button
+						onClick={handleDeleteConfirm}
+						variant="gradient"
+						color="green">
+						<span>Delete</span>
+					</Button>
+				</DialogFooter>
+			</Dialog>
 		</main>
 	);
 };

@@ -162,7 +162,7 @@ const Register = () => {
 						variant="gradient"
 						className="mt-6"
 						fullWidth>
-						{!isLoading ? 'Submit' : <Loading />}
+						{!isLoading ? 'Sign Up' : <Loading />}
 					</Button>
 
 					<Toaster />
