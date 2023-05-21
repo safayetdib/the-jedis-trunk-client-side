@@ -31,7 +31,8 @@ const router = createBrowserRouter([
 			{
 				path: '/toys',
 				element: <AllToys />,
-				loader: () => fetch(`http://localhost:5000/toys`),
+				loader: () =>
+					fetch(`https://the-jedis-trunk-server-side.vercel.app/toys`),
 			},
 			{
 				path: '/toy/:id',
@@ -40,7 +41,10 @@ const router = createBrowserRouter([
 						<ToyDetails />
 					</PrivateRoute>
 				),
-				loader: ({ params }) => fetch(`http://localhost:5000/toy/${params.id}`),
+				loader: ({ params }) =>
+					fetch(
+						`https://the-jedis-trunk-server-side.vercel.app/toy/${params.id}`
+					),
 			},
 			{
 				path: '/my-toys',

@@ -50,7 +50,9 @@ const MyToys = () => {
 	}
 
 	useEffect(() => {
-		fetch(`http://localhost:5000/my-toys?email=${seller_email}&sort=${sort}`)
+		fetch(
+			`https://the-jedis-trunk-server-side.vercel.app/my-toys?email=${seller_email}&sort=${sort}`
+		)
 			.then((res) => res.json())
 			.then((data) => {
 				setMyToys(data);
@@ -65,7 +67,7 @@ const MyToys = () => {
 		setToyData(data);
 	};
 	const handleUpdateConfirm = (id, data) => {
-		fetch(`http://localhost:5000/toy-update/${id}`, {
+		fetch(`https://the-jedis-trunk-server-side.vercel.app/toy-update/${id}`, {
 			method: 'PATCH',
 			headers: {
 				'content-type': 'application/json',
@@ -95,7 +97,7 @@ const MyToys = () => {
 		console.log(id);
 	};
 	const handleDeleteConfirm = () => {
-		fetch(`http://localhost:5000/toy/${toyId}`, {
+		fetch(`https://the-jedis-trunk-server-side.vercel.app/toy/${toyId}`, {
 			method: 'DELETE',
 		})
 			.then((res) => res.json())

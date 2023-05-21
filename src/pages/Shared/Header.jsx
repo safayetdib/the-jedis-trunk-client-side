@@ -234,12 +234,12 @@ const Header = () => {
 						{user ? (
 							<>
 								{/* MY TOYS */}
-								<NavMenuLink path={`/toys/${user.user}`}>
+								<NavMenuLink path="/my-toys">
 									<AiOutlineBug /> My Toys
 								</NavMenuLink>
 
 								{/* ADD TOYS */}
-								<NavMenuLink path={`/add`}>
+								<NavMenuLink path="/add-toy">
 									<AiOutlinePlusCircle /> Add Toys
 								</NavMenuLink>
 							</>

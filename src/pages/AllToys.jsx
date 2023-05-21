@@ -36,7 +36,7 @@ const AllToys = () => {
 	}
 
 	useEffect(() => {
-		fetch(`http://localhost:5000/toys?sort=${sort}`)
+		fetch(`https://the-jedis-trunk-server-side.vercel.app/toys?sort=${sort}`)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);

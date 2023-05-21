@@ -11,14 +11,16 @@ const ShopByCategory = () => {
 
 	// get category names
 	useEffect(() => {
-		fetch(`http://localhost:5000/categories`)
+		fetch(`https://the-jedis-trunk-server-side.vercel.app/categories`)
 			.then((res) => res.json())
 			.then((data) => setCategories(data));
 	}, []);
 
 	// get toys data by category name
 	useEffect(() => {
-		fetch(`http://localhost:5000/toys/category/${selectedCategory}`)
+		fetch(
+			`https://the-jedis-trunk-server-side.vercel.app/toys/category/${selectedCategory}`
+		)
 			.then((res) => res.json())
 			.then((data) => setToysData(data));
 	}, [selectedCategory]);

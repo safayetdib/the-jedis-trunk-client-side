@@ -39,7 +39,7 @@ const AddToy = () => {
 		};
 		console.log(newToyData);
 
-		fetch('http://localhost:5000/toy/add', {
+		fetch('https://the-jedis-trunk-server-side.vercel.app/toy/add', {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json',
