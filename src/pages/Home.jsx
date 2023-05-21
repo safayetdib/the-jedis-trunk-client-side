@@ -22,7 +22,7 @@ const Home = () => {
 				<Banner />
 			</div>
 			{/* SHOP BY CATEGORY */}
-			<div data-aos="zoom-out" data-aos-duration="1000">
+			<div data-aos="fade-up-left">
 				<ShopByCategory />
 			</div>
 			{/* Offer */}

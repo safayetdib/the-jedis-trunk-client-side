@@ -3,7 +3,7 @@ import { Carousel, Typography, Button } from '@material-tailwind/react';
 export default function Banner() {
 	return (
 		<section className="mx-auto max-w-7xl px-2">
-			<Carousel className="rounded-xl" loop>
+			<Carousel className="rounded-xl" loop autoplay>
 				<div className="relative h-[600px] w-full">
 					<img
 						src="/assets/banner1.jpg"
