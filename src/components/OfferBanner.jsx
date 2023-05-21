@@ -7,10 +7,12 @@ const OfferBanner = () => {
 				<div className="container mx-auto">
 					<div className="flex flex-col items-center justify-between lg:flex-row">
 						<div>
-							<h2 className="font-cursive text-2xl font-bold tracking-wide">
+							<h2 className="font-cursive text-base font-bold tracking-wide">
 								Unleash the <span className="text-gray-500">Dark Side</span> for
 								Less! <br />
-								<span className="text-lime-500">Enjoy a Massive 50% </span>
+								<span className="text-2xl text-lime-500">
+									Enjoy a Massive 50%{' '}
+								</span>
 								<br />
 								Discount on <span className="text-red-600">
 									Darth Vader

@@ -31,12 +31,11 @@ const ShopByCategory = () => {
 
 	return (
 		<section className="mx-auto max-w-7xl px-2">
-			<div className="mb-4 mt-6 rounded-xl border border-gray-800 bg-black bg-opacity-70 py-4 text-gray-100">
-				<Typography
-					variant="h3"
-					className="text-center font-cursive tracking-wide">
+			<div className="mb-4 mt-6 rounded-xl border border-gray-800 bg-black  bg-opacity-70 py-4 text-center text-gray-100">
+				<Typography variant="h3" className="font-cursive tracking-wide">
 					Shop By Category
 				</Typography>
+				<p>Browse the Best Selection and Tailor Your Star Wars Experience</p>
 			</div>
 
 			<Tabs selectedTabClassName="bg-black text-white border-4 border-gray-700">

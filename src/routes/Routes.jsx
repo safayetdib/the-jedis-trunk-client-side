@@ -9,6 +9,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import AddToy from '../pages/AddToy';
 import PrivateRoute from './PrivateRoute';
+import Blogs from '../pages/Blogs';
 
 const router = createBrowserRouter([
 	{
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
 						<AddToy />
 					</PrivateRoute>
 				),
+			},
+			{
+				path: '/blogs',
+				element: <Blogs />,
 			},
 		],
 	},
