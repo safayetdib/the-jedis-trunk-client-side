@@ -43,25 +43,11 @@ const Header = () => {
 		);
 	}, []);
 
-	const notify = () => {
-		toast.success(`You've logged out!`, {
-			style: {
-				border: '1px solid #713200',
-				padding: '16px',
-				color: '#713200',
-			},
-			iconTheme: {
-				primary: '#713200',
-				secondary: '#FFFAEE',
-			},
-		});
-	};
-
 	const { user, logout } = useContext(AuthContext);
 
 	const handleSignOut = () => {
 		logout().then(() => {
-			notify();
+			toast.success(`You've logged out successfully`);
 		});
 		closeMenu();
 	};
@@ -191,9 +177,8 @@ const Header = () => {
 											<AiOutlinePoweroff /> Sign Out
 										</Typography>
 									</MenuItem>
-
-									<Toaster />
 								</MenuList>
+								<Toaster />
 							</Menu>
 						)}
 

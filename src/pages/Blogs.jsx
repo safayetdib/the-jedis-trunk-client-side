@@ -1,9 +1,14 @@
 import { Typography } from '@material-tailwind/react';
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const Blogs = () => {
 	return (
 		<main className="mx-auto max-w-7xl space-y-4 px-2 text-gray-100">
+			<Helmet>
+				<meta charSet="utf-8" />
+				<title>The Jedi's Trunk | Blogs</title>
+			</Helmet>
 			<div className="mb-4 mt-6 rounded-xl border border-gray-800 bg-black  bg-opacity-70 py-10 text-center text-gray-100">
 				<Typography variant="h3" className="font-cursive tracking-wide">
 					Blogs

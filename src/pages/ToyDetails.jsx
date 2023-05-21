@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { Rating } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
+import { Helmet } from 'react-helmet';
 // import { Button } from '@material-tailwind/react';
 
 const ToyDetails = () => {
@@ -22,6 +23,10 @@ const ToyDetails = () => {
 	return (
 		<main>
 			<section>
+				<Helmet>
+					<meta charSet="utf-8" />
+					<title>The Jedi's Trunk | {name}</title>
+				</Helmet>
 				<div className="relative mx-auto max-w-7xl px-2 py-8">
 					<div className="grid grid-cols-1 items-start gap-4 rounded-xl bg-gray-900 p-2 text-gray-100 md:grid-cols-2">
 						{/* photo */}

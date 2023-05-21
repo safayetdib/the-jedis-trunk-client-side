@@ -16,6 +16,7 @@ import { Toaster, toast } from 'react-hot-toast';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import UpdateToyData from '../components/UpdateToyData';
+import { Helmet } from 'react-helmet';
 
 const TABLE_HEAD = [
 	'No.',
@@ -116,6 +117,10 @@ const MyToys = () => {
 
 	return (
 		<main className="mx-auto max-w-7xl px-2">
+			<Helmet>
+				<meta charSet="utf-8" />
+				<title>The Jedi's Trunk | My Toys</title>
+			</Helmet>
 			{/* header */}
 			<Card className="my-6 border border-gray-800 bg-black bg-opacity-70 p-2 md:p-10">
 				<div className="flex flex-col items-center justify-between gap-4 md:flex-row">

@@ -9,6 +9,7 @@ import {
 import { useContext } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import { AuthContext } from '../context/AuthProvider';
+import { Helmet } from 'react-helmet';
 
 const AddToy = () => {
 	const { user } = useContext(AuthContext);
@@ -60,6 +61,10 @@ const AddToy = () => {
 
 	return (
 		<main>
+			<Helmet>
+				<meta charSet="utf-8" />
+				<title>The Jedi's Trunk | Add Toy</title>
+			</Helmet>
 			<section className="mx-auto max-w-7xl rounded-xl border border-gray-700 bg-black bg-opacity-60 px-2">
 				<div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
 					<div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">

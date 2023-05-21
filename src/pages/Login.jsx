@@ -18,6 +18,7 @@ import {
 } from 'react-icons/ai';
 import { Toaster, toast } from 'react-hot-toast';
 import Loading from '../components/Loading';
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
 	const { signIn, signInWithGoogle } = useContext(AuthContext);
@@ -66,6 +67,11 @@ const Login = () => {
 
 	return (
 		<main className="flex-center mx-auto min-h-[70vh] max-w-7xl px-2">
+			<Helmet>
+				<meta charSet="utf-8" />
+				<title>The Jedi's Trunk | Login</title>
+			</Helmet>
+
 			<Card className="mt-16 w-96 bg-gray-900 sm:mt-20">
 				<CardHeader
 					variant="gradient"

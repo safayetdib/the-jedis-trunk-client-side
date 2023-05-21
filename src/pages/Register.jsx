@@ -9,6 +9,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
 import Loading from '../components/Loading';
 import { Toaster, toast } from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 
 const Register = () => {
 	const { createUser, signIn, updateUserData, signInWithGoogle, logout } =
@@ -78,6 +79,10 @@ const Register = () => {
 
 	return (
 		<section className="flex-center mx-auto min-h-[80vh] max-w-7xl px-2">
+			<Helmet>
+				<meta charSet="utf-8" />
+				<title>The Jedi's Trunk | Register</title>
+			</Helmet>
 			<div className="flex-center w-full flex-col rounded-xl bg-gray-900 px-4 py-10 text-gray-100 sm:max-w-lg lg:w-1/2">
 				<Typography variant="h4" className="font-cursive tracking-wider">
 					Sign Up

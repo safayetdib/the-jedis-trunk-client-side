@@ -9,6 +9,7 @@ import {
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 const AllToys = () => {
 	const TABLE_HEAD = [
@@ -39,13 +40,16 @@ const AllToys = () => {
 		fetch(`https://the-jedis-trunk-server-side.vercel.app/toys?sort=${sort}`)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
 				setAllData(data);
 			});
 	}, [sort]);
 
 	return (
 		<main className="mx-auto max-w-7xl px-2">
+			<Helmet>
+				<meta charSet="utf-8" />
+				<title>The Jedi's Trunk | All Toys</title>
+			</Helmet>
 			<Card className="my-6 border border-gray-800 bg-black bg-opacity-70 p-2 md:p-10">
 				<div className="flex flex-col items-center justify-between gap-4 md:flex-row">
 					<h1 className="my-4 font-cursive text-4xl text-white md:m-0">
