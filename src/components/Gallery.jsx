@@ -2,7 +2,7 @@ import React from 'react';
 
 const Gallery = () => {
 	return (
-		<section className="mx-auto max-w-7xl bg-gray-800 py-6 text-gray-50">
+		<section className="mx-auto max-w-7xl bg-gray-800 px-2 py-6 text-gray-50">
 			<div className="container mx-auto grid grid-cols-2 gap-4 p-4 md:grid-cols-4">
 				<img
 					src="https://source.unsplash.com/random/301x301/"

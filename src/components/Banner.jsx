@@ -3,7 +3,7 @@ import { Carousel, Typography, Button } from '@material-tailwind/react';
 export default function Banner() {
 	return (
 		<section className="mx-auto max-w-7xl px-2">
-			<Carousel className="rounded-xl" loop autoplay>
+			<Carousel className="rounded-xl" loop>
 				<div className="relative h-[600px] w-full">
 					<img
 						src="/assets/banner1.jpg"
@@ -26,7 +26,7 @@ export default function Banner() {
 								Collect, Display, and Expand Your Star Wars Collection: Embrace
 								the Legacy of the Galaxy Far, Far Away!
 							</Typography>
-							<div className="flex justify-center gap-2">
+							<div className="flex-center flex-col gap-2 sm:flex-row">
 								<Button size="lg" color="lime">
 									Explore
 								</Button>
@@ -43,8 +43,8 @@ export default function Banner() {
 						alt="image 2"
 						className="h-full w-full object-cover"
 					/>
-					<div className="absolute inset-0 grid h-full w-full items-center bg-black/70">
-						<div className="w-3/4 pl-12 md:w-2/4 md:pl-20 lg:pl-32">
+					<div className="absolute inset-0 grid h-full w-full place-items-center bg-black/70 text-center">
+						<div className="w-3/4 md:w-2/4 md:pl-20 ">
 							<Typography
 								variant="h1"
 								color="white"
@@ -58,7 +58,7 @@ export default function Banner() {
 								Ignite Your Imagination with Authentic Star Wars Toys: Create
 								Your Own Epic Battles and Stories!
 							</Typography>
-							<div className="flex gap-2">
+							<div className="flex-center flex-col gap-2 sm:flex-row">
 								<Button size="lg" color="lime">
 									Explore
 								</Button>
@@ -75,8 +75,8 @@ export default function Banner() {
 						alt="image 3"
 						className="h-full w-full object-cover"
 					/>
-					<div className="absolute inset-0 grid h-full w-full items-end bg-black/70">
-						<div className="w-3/4 pb-12 pl-12 md:w-2/4 md:pb-20 md:pl-20 lg:pb-32 lg:pl-32">
+					<div className="absolute inset-0 grid h-full w-full place-items-center bg-black/70 text-center">
+						<div className="w-3/4  md:w-2/4 ">
 							<Typography
 								variant="h1"
 								color="white"
@@ -90,7 +90,7 @@ export default function Banner() {
 								From Lightsabers to Action Figures: Find Your Favorite
 								Characters and Relive Iconic Moments!
 							</Typography>
-							<div className="flex gap-2">
+							<div className="flex-center flex-col gap-2 sm:flex-row">
 								<Button size="lg" color="lime">
 									Explore
 								</Button>
