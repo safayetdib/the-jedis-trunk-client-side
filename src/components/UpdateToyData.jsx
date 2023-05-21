@@ -45,6 +45,7 @@ const UpdateToyData = ({ toyData, closeUpdateModal, handleUpdateConfirm }) => {
 					defaultValue={description}
 					color="blue-gray"
 					variant="outlined"
+					required
 				/>
 
 				<div className="flex flex-col items-center gap-4 sm:flex-row">
@@ -56,6 +57,7 @@ const UpdateToyData = ({ toyData, closeUpdateModal, handleUpdateConfirm }) => {
 						defaultValue={price}
 						color="blue-gray"
 						variant="outlined"
+						required
 					/>
 					{/* quantity */}
 					<Input
@@ -65,6 +67,7 @@ const UpdateToyData = ({ toyData, closeUpdateModal, handleUpdateConfirm }) => {
 						defaultValue={quantity}
 						color="blue-gray"
 						variant="outlined"
+						required
 					/>
 				</div>
 			</div>

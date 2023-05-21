@@ -162,9 +162,9 @@ const Header = () => {
 												}`}
 											/>
 										</Button>
-										{user && (
+										{user && user.displayName && (
 											<span className="absolute right-16 top-1 w-40 scale-0 rounded bg-gray-800 bg-opacity-90 p-2 text-center text-xs font-medium text-white shadow-lg transition-all group-hover:scale-100">
-												{user?.displayName}
+												{user.displayName}
 											</span>
 										)}
 									</div>
