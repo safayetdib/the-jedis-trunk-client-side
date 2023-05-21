@@ -17,6 +17,7 @@ import {
 	AiFillEyeInvisible,
 } from 'react-icons/ai';
 import { Toaster, toast } from 'react-hot-toast';
+import Loading from '../components/Loading';
 
 const Login = () => {
 	const { signIn, signInWithGoogle } = useContext(AuthContext);
@@ -28,19 +29,6 @@ const Login = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState('');
-
-	const notify = () =>
-		toast.success('Logged In Successfully', {
-			style: {
-				border: '1px solid #f40000',
-				padding: '16px',
-				color: '#f40000',
-			},
-			iconTheme: {
-				primary: '#f40000',
-				secondary: '#FFFAEE',
-			},
-		});
 
 	const handleLogin = (e) => {
 		e.preventDefault();
@@ -57,7 +45,7 @@ const Login = () => {
 				setIsLoading(false);
 				setError('');
 
-				notify();
+				toast.success('Signed In Successfully');
 				navigate(from, { replace: true });
 			})
 			.catch((err) => {
@@ -70,7 +58,7 @@ const Login = () => {
 		signInWithGoogle()
 			.then(() => {
 				setError('');
-				notify();
+				toast.success('Signed In Successfully');
 				navigate(from, { replace: true });
 			})
 			.catch((err) => setError(err.message));
@@ -119,16 +107,16 @@ const Login = () => {
 						)}
 					</CardBody>
 					<CardFooter className="pt-0">
-						<Button
-							type="submit"
-							variant="gradient"
-							color="lime"
-							className="shadow-none"
-							fullWidth>
-							Sign In
-						</Button>
-
-						<Toaster />
+						<div>
+							<Button
+								type="submit"
+								color="lime"
+								variant="gradient"
+								className="shadow-none"
+								fullWidth>
+								{!isLoading ? 'Sign In' : <Loading />}
+							</Button>
+						</div>
 
 						<div className="relative mt-6">
 							<span className="block h-px w-full bg-gray-300"></span>
@@ -189,6 +177,14 @@ const Login = () => {
 					</CardFooter>
 				</form>
 			</Card>
+
+			{/* toast */}
+			<Toaster
+				position="top-center"
+				toastOptions={{
+					duration: 4000,
+				}}
+			/>
 		</main>
 	);
 };

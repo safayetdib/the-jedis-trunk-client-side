@@ -205,7 +205,7 @@ const MyToys = () => {
 										<p className="line-clamp-3">{description}</p>
 										<Link
 											to={`/toy/${_id}`}
-											className="text-sm text-gray-900 underline">
+											className="text-sm text-gray-400 underline">
 											Read More
 										</Link>
 									</td>

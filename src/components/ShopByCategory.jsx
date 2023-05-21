@@ -31,7 +31,7 @@ const ShopByCategory = () => {
 
 	return (
 		<section className="mx-auto max-w-7xl px-4">
-			<div className="mb-4 mt-10 rounded-xl border border-gray-800 bg-black bg-opacity-70 py-4 text-gray-100">
+			<div className="mb-4 mt-6 rounded-xl border border-gray-800 bg-black bg-opacity-70 py-4 text-gray-100">
 				<Typography
 					variant="h3"
 					className="text-center font-cursive tracking-wide">

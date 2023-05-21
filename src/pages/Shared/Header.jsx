@@ -75,7 +75,7 @@ const Header = () => {
 					{/* LOGO */}
 					<Link to="/">
 						<Typography className="ml-2 mr-4 flex cursor-pointer items-center gap-2 py-1.5 font-cursive">
-							<FaJedi className="text-3xl text-blue-500 sm:text-5xl" />
+							<FaJedi className="text-3xl text-lime-500 sm:text-5xl" />
 							<span className="flex flex-col">
 								<span className="text-xs text-gray-200 sm:text-xl">
 									The Jedi&apos;s Trunk

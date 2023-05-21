@@ -25,20 +25,6 @@ const Register = () => {
 	const [error, setError] = useState('');
 	const [passError, setPassError] = useState('');
 
-	const notify = () => {
-		toast.success('Registered Successfully', {
-			style: {
-				border: '1px solid #f40000',
-				padding: '16px',
-				color: '#f40000',
-			},
-			iconTheme: {
-				primary: '#f40000',
-				secondary: '#FFFAEE',
-			},
-		});
-	};
-
 	// HANDLE REGISTER
 	const handleRegister = (e) => {
 		e.preventDefault();
@@ -63,7 +49,7 @@ const Register = () => {
 			.then(() => {
 				updateUserData(name, photo).then(() => {
 					navigate(from, { replace: true });
-					notify();
+					toast.success('Registered Successfully');
 				});
 				logout();
 				signIn(email, password);
@@ -72,7 +58,7 @@ const Register = () => {
 				setError('');
 				setIsLoading(false);
 				navigate(from, { replace: true });
-				notify();
+				toast.success('Registered Successfully');
 			})
 			.catch((err) => {
 				setError(err.message);
@@ -84,7 +70,7 @@ const Register = () => {
 		signInWithGoogle()
 			.then(() => {
 				setError('');
-				notify();
+				toast.success('Registered Successfully');
 				navigate(from, { replace: true });
 			})
 			.catch((err) => setError(err.message));
@@ -92,32 +78,39 @@ const Register = () => {
 
 	return (
 		<section className="flex-center mx-auto min-h-[80vh] max-w-7xl px-2">
-			<div className="flex-center w-full flex-col rounded-xl bg-white px-4 py-10 sm:max-w-lg lg:w-1/2">
-				<Typography
-					variant="h4"
-					color="blue-gray"
-					className="font-cursive tracking-wider">
+			<div className="flex-center w-full flex-col rounded-xl bg-gray-900 px-4 py-10 text-gray-100 sm:max-w-lg lg:w-1/2">
+				<Typography variant="h4" className="font-cursive tracking-wider">
 					Sign Up
 				</Typography>
-				<Typography color="gray" className="mt-1 font-normal">
-					Enter your details to register.
+				<Typography className="mt-1 font-normal text-gray-200">
+					Enter your details to register
 				</Typography>
 				<form
 					onSubmit={handleRegister}
 					className="mb-2 mt-8 w-full max-w-screen-lg sm:w-96">
 					<div className="mb-4 flex flex-col gap-6">
-						<Input name="name" color="blue-gray" size="lg" label="Name" />
-						<Input name="photo" color="blue-gray" size="lg" label="Photo URL" />
+						<Input
+							name="name"
+							className="text-gray-100"
+							size="lg"
+							label="Name"
+						/>
+						<Input
+							name="photo"
+							className="text-gray-100"
+							size="lg"
+							label="Photo URL"
+						/>
 						<Input
 							name="email"
-							color="blue-gray"
+							className="text-gray-100"
 							size="lg"
 							label="Email"
 							required
 						/>
 						<Input
 							name="password"
-							color="blue-gray"
+							className="text-gray-100"
 							type="password"
 							size="lg"
 							label="Password"
@@ -125,7 +118,7 @@ const Register = () => {
 						/>
 						{/* PASSWORD ERROR MESSAGE */}
 						{passError && (
-							<p className="text-red-accent flex items-center justify-center gap-2 rounded-lg border border-red-300 bg-red-100 p-2 text-center">
+							<p className="flex  items-center justify-center gap-2 rounded-lg bg-red-700 p-2 text-center text-gray-100 shadow-2xl">
 								<AiOutlineWarning className="text-lg" /> {passError}
 							</p>
 						)}
@@ -136,12 +129,11 @@ const Register = () => {
 						label={
 							<Typography
 								variant="small"
-								color="gray"
-								className="flex flex-wrap items-center font-normal">
+								className="flex flex-wrap items-center font-normal text-gray-100">
 								I agree the
 								<a
 									href="#"
-									className="font-medium transition-colors hover:text-blue-500">
+									className="font-medium text-blue-300 transition-colors hover:text-blue-500">
 									&nbsp;Terms and Conditions
 								</a>
 							</Typography>
@@ -151,7 +143,7 @@ const Register = () => {
 
 					{/* ERROR MESSAGE */}
 					{error && (
-						<p className="text-red-accent flex items-center justify-center gap-2 rounded-lg border border-red-300 bg-red-100 p-2 text-center">
+						<p className="flex  items-center justify-center gap-2 rounded-lg bg-red-700 p-2 text-center text-gray-100 shadow-2xl">
 							<AiOutlineWarning className="text-lg" /> {error}
 						</p>
 					)}
@@ -160,16 +152,14 @@ const Register = () => {
 						type="submit"
 						color="lime"
 						variant="gradient"
-						className="mt-6"
+						className="mt-6 shadow-none"
 						fullWidth>
 						{!isLoading ? 'Sign Up' : <Loading />}
 					</Button>
 
-					<Toaster />
-
 					<div className="relative mt-6">
 						<span className="block h-px w-full bg-gray-300"></span>
-						<p className="absolute inset-x-0 -top-2 mx-auto inline-block w-fit bg-white px-4 text-sm text-gray-600">
+						<p className="absolute inset-x-0 -top-2 mx-auto inline-block w-fit bg-gray-900 px-4 text-sm text-gray-200">
 							Or
 						</p>
 					</div>
@@ -179,14 +169,14 @@ const Register = () => {
 						onClick={handleGoogleSignIn}
 						variant="gradient"
 						color="white"
-						className="mt-6 flex items-center justify-center gap-x-3"
+						className="mt-6 flex items-center justify-center gap-x-3 shadow-none"
 						fullWidth>
 						<svg
 							className="h-5 w-5"
 							viewBox="0 0 48 48"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg">
-							<g clip-path="url(#clip0_17_40)">
+							<g clipPath="url(#clip0_17_40)">
 								<path
 									d="M47.532 24.5528C47.532 22.9214 47.3997 21.2811 47.1175 19.6761H24.48V28.9181H37.4434C36.9055 31.8988 35.177 34.5356 32.6461 36.2111V42.2078H40.3801C44.9217 38.0278 47.532 31.8547 47.532 24.5528Z"
 									fill="#4285F4"
@@ -213,16 +203,24 @@ const Register = () => {
 						Continue with Google
 					</Button>
 
-					<Typography color="gray" className="mt-4 text-center font-normal">
+					<Typography className="mt-4 text-center font-normal">
 						Already have an account?{' '}
 						<Link
 							to="/login"
-							className="ml-2 font-semibold text-black hover:underline">
+							className="ml-2 font-semibold tracking-wider  hover:underline">
 							Sign In
 						</Link>
 					</Typography>
 				</form>
 			</div>
+
+			{/* toast */}
+			<Toaster
+				position="top-center"
+				toastOptions={{
+					duration: 4000,
+				}}
+			/>
 		</section>
 	);
 };
