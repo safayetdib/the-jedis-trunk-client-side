@@ -191,7 +191,7 @@ const MyToys = () => {
 								: 'p-4 border-b border-gray-500 max-w-[200px]';
 
 							return (
-								<tr key={index} className="bg-white text-black">
+								<tr key={index} className="bg-gray-900 text-gray-100">
 									{/* serial no */}
 									<td className={classes}>{index + 1}.</td>
 									{/* photo */}
@@ -222,10 +222,10 @@ const MyToys = () => {
 										{/* update */}
 										<Button
 											onClick={() => handleUpdate(toyData)}
-											color="lime"
+											color="white"
 											variant="gradient"
 											title="Update"
-											className="mb-2 flex items-center gap-2"
+											className="mb-2 flex items-center gap-2 shadow-none"
 											fullWidth>
 											<AiFillEdit className="text-base" /> Update
 										</Button>
@@ -234,7 +234,7 @@ const MyToys = () => {
 											onClick={() => handleDelete(_id)}
 											color="red"
 											title="Delete"
-											className="flex items-center gap-2 bg-red-900 tracking-wide text-white"
+											className="flex items-center gap-2 tracking-wide shadow-none"
 											fullWidth>
 											<AiFillDelete className="text-base" /> Delete
 										</Button>

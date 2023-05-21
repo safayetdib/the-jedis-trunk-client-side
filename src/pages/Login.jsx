@@ -77,12 +77,12 @@ const Login = () => {
 	};
 
 	return (
-		<main className="flex-center mx-auto min-h-[80vh] max-w-7xl px-2">
-			<Card className="w-96">
+		<main className="flex-center mx-auto min-h-[70vh] max-w-7xl px-2">
+			<Card className="mt-16 w-96 bg-gray-900 sm:mt-20">
 				<CardHeader
 					variant="gradient"
 					color="lime"
-					className="mb-4 grid h-20 place-items-center">
+					className="mb-4 grid h-20 place-items-center shadow-none">
 					<Typography variant="h3" className="font-cursive text-black">
 						Sign In
 					</Typography>
@@ -92,7 +92,7 @@ const Login = () => {
 						<Input
 							name="email"
 							type="email"
-							color="blue-gray"
+							className="text-gray-100"
 							label="Email"
 							size="lg"
 							required
@@ -100,28 +100,31 @@ const Login = () => {
 						<Input
 							name="password"
 							type="password"
-							color="blue-gray"
+							className="text-gray-100"
 							label="Password"
 							size="lg"
 							required
 						/>
-						<div className="-ml-2.5 flex items-center justify-between">
-							<Checkbox color="red" label="Remember Me" />
-							<Link
-								to="/"
-								className="text-sm text-gray-600 underline hover:text-gray-800">
+						<div className="-ml-2.5 flex flex-col items-center justify-between sm:flex-row">
+							<Checkbox label="Remember Me" className="text-gray-100" />
+							<Link to="/" className="text-sm text-gray-200  hover:underline">
 								Forgot password?
 							</Link>
 						</div>
 						{/* ERROR MESSAGE */}
 						{error && (
-							<p className="text-red-accent  flex items-center justify-center gap-2 rounded-lg border border-red-300 bg-red-100 p-2 text-center">
+							<p className="flex  items-center justify-center gap-2 rounded-lg bg-red-700 p-2 text-center text-gray-100 shadow-2xl">
 								<AiOutlineWarning className="text-lg" /> {error}
 							</p>
 						)}
 					</CardBody>
 					<CardFooter className="pt-0">
-						<Button type="submit" variant="gradient" color="lime" fullWidth>
+						<Button
+							type="submit"
+							variant="gradient"
+							color="lime"
+							className="shadow-none"
+							fullWidth>
 							Sign In
 						</Button>
 
@@ -129,7 +132,7 @@ const Login = () => {
 
 						<div className="relative mt-6">
 							<span className="block h-px w-full bg-gray-300"></span>
-							<p className="absolute inset-x-0 -top-2 mx-auto inline-block w-fit bg-white px-4 text-sm text-gray-600">
+							<p className="absolute inset-x-0 -top-2 mx-auto inline-block w-fit bg-gray-900 px-4 text-sm text-gray-200">
 								Or
 							</p>
 						</div>
@@ -139,14 +142,14 @@ const Login = () => {
 							onClick={handleGoogleSignIn}
 							variant="gradient"
 							color="white"
-							className="mt-6 flex items-center justify-center gap-x-3"
+							className="mt-6 flex items-center justify-center gap-x-3 shadow-none"
 							fullWidth>
 							<svg
 								className="h-5 w-5"
 								viewBox="0 0 48 48"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg">
-								<g clip-path="url(#clip0_17_40)">
+								<g clipPath="url(#clip0_17_40)">
 									<path
 										d="M47.532 24.5528C47.532 22.9214 47.3997 21.2811 47.1175 19.6761H24.48V28.9181H37.4434C36.9055 31.8988 35.177 34.5356 32.6461 36.2111V42.2078H40.3801C44.9217 38.0278 47.532 31.8547 47.532 24.5528Z"
 										fill="#4285F4"
@@ -173,11 +176,13 @@ const Login = () => {
 							Continue with Google
 						</Button>
 
-						<Typography variant="small" className="mt-6 flex justify-center">
+						<Typography
+							variant="small"
+							className="mt-6 flex justify-center text-gray-200">
 							Don&apos;t have an account?
 							<Link
 								to="/register"
-								className="ml-2 font-semibold text-black hover:underline">
+								className="ml-2 font-semibold tracking-widest text-white hover:underline">
 								Sign Up
 							</Link>
 						</Typography>

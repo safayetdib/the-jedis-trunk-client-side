@@ -23,7 +23,7 @@ const ToyDetails = () => {
 		<main>
 			<section>
 				<div className="relative mx-auto max-w-7xl px-2 py-8">
-					<div className="grid grid-cols-1 items-start gap-4 rounded-xl bg-white p-2 md:grid-cols-2">
+					<div className="grid grid-cols-1 items-start gap-4 rounded-xl bg-gray-900 p-2 text-gray-100 md:grid-cols-2">
 						{/* photo */}
 						<div className="h-full">
 							<img
@@ -35,10 +35,10 @@ const ToyDetails = () => {
 
 						<div className="p-2">
 							{/* category */}
-							<strong className="rounded-full border border-blue-600 bg-gray-100 px-3 py-0.5 text-sm font-medium tracking-wide text-blue-600">
+							<strong className="rounded-full bg-lime-500 px-3 py-2 text-sm font-medium tracking-wide text-gray-900">
 								{category}
 							</strong>
-							<div className="mt-2 justify-between sm:flex">
+							<div className="mt-3 justify-between sm:flex">
 								<div className="space-y-2">
 									{/* title */}
 									<h1 className="font-cursive text-xl tracking-wider sm:text-2xl">
@@ -59,7 +59,7 @@ const ToyDetails = () => {
 								</div>
 
 								{/* price */}
-								<div className="mt-3 h-fit w-fit rounded-xl border-2 border-gray-700 bg-gray-100 px-3 py-2 text-xl font-bold sm:ml-2 sm:mt-0">
+								<div className="mt-3 h-fit w-fit rounded-xl border-2 border-black bg-lime-500 px-3 py-2 text-xl font-bold text-gray-900 sm:ml-2 sm:mt-0">
 									${price}
 								</div>
 							</div>
@@ -131,7 +131,7 @@ const ToyDetails = () => {
 											className="peer sr-only"
 										/>
 
-										<span className="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white">
+										<span className="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium ">
 											XS
 										</span>
 									</label>
@@ -221,31 +221,6 @@ const ToyDetails = () => {
 									</span>
 								</div>
 							</div>
-
-							{/* <div className="mt-8 flex gap-4">
-									quantity
-									<div>
-										<label htmlFor="quantity" className="sr-only">
-											Qty
-										</label>
-										<input
-											type="number"
-											id="quantity"
-											min="1"
-											defaultValue="1"
-											className="w-12 rounded border border-gray-200 py-3 text-center text-xs [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-										/>
-									</div>
-
-									add to cart
-									<Button
-										color="lime"
-										variant="gradient"
-										type="submit"
-										fullWidth>
-										Add to Cart
-									</Button>
-								</div> */}
 						</div>
 					</div>
 				</div>

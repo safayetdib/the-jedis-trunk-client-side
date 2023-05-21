@@ -69,19 +69,18 @@ const Header = () => {
 	return (
 		<header className="my-4 px-2">
 			<Navbar
-				color="lime"
 				variant="gradient"
-				className="mx-auto max-w-7xl p-2 lg:rounded-full lg:pl-6">
-				<div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
+				className="mx-auto max-w-7xl border-0 bg-gray-900 p-2 lg:rounded-full lg:pl-6">
+				<div className="relative mx-auto flex items-center justify-between text-gray-50">
 					{/* LOGO */}
 					<Link to="/">
-						<Typography className="ml-2 mr-4 flex cursor-pointer items-center gap-2 py-1.5 font-cursive text-gray-900 hover:text-gray-800">
-							<FaJedi className="text-3xl sm:text-5xl" />
+						<Typography className="ml-2 mr-4 flex cursor-pointer items-center gap-2 py-1.5 font-cursive">
+							<FaJedi className="text-3xl text-blue-500 sm:text-5xl" />
 							<span className="flex flex-col">
-								<span className="text-xs sm:text-xl">
+								<span className="text-xs text-gray-200 sm:text-xl">
 									The Jedi&apos;s Trunk
 								</span>
-								<span className="hidden text-xs sm:inline-block">
+								<span className="hidden text-xs text-gray-400 sm:inline-block">
 									The ultimate destination for Star Wars toy collectors
 								</span>
 							</span>
@@ -170,7 +169,7 @@ const Header = () => {
 										)}
 									</div>
 								</MenuHandler>
-								<MenuList className="overflow-auto p-1">
+								<MenuList className="overflow-hidden bg-black p-1 text-gray-200">
 									{/* USER */}
 									<Link to="/" className="outline-none">
 										<MenuItem className="rounded">
@@ -184,14 +183,11 @@ const Header = () => {
 									</Link>
 
 									{/* SIGN OUT */}
-									<MenuItem
-										onClick={handleSignOut}
-										className="rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10">
+									<MenuItem onClick={handleSignOut}>
 										<Typography
 											as="span"
 											variant="small"
-											className="flex items-center gap-2 font-medium"
-											color="red">
+											className="flex items-center gap-2 font-medium text-red-500">
 											<AiOutlinePoweroff /> Sign Out
 										</Typography>
 									</MenuItem>
@@ -207,7 +203,7 @@ const Header = () => {
 							color="blue-gray"
 							variant="text"
 							onClick={toggleIsNavOpen}
-							className="text-2xl text-black lg:hidden">
+							className="bg-blue-gray-900 text-2xl text-gray-200 lg:hidden">
 							{isNavOpen ? <HiXMark /> : <HiBars3 />}
 						</IconButton>
 					</div>
@@ -215,7 +211,7 @@ const Header = () => {
 
 				{/* Small Device : Nav Menu */}
 				<Collapse open={isNavOpen}>
-					<ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
+					<ul className="mb-4 mt-2 flex flex-col gap-2 text-gray-200 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
 						{/* HOME */}
 						<NavMenuLink path="/">
 							<AiOutlineHome /> Home

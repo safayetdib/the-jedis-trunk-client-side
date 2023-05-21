@@ -7,7 +7,7 @@ import {
 	Typography,
 } from '@material-tailwind/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const AllToys = () => {
@@ -121,7 +121,7 @@ const AllToys = () => {
 									: 'p-4 border-b border-gray-500 max-w-[200px]';
 
 								return (
-									<tr key={index} className="bg-white text-black">
+									<tr key={index} className="bg-gray-900 text-gray-100">
 										<td className={classes}>{index + 1}.</td>
 										<td className={classes}>
 											<img src={photo} alt={name} className="w-24" />
@@ -136,7 +136,10 @@ const AllToys = () => {
 										</td>
 										<td className={classes}>
 											<Link to={`/toy/${_id}`}>
-												<Button color="lime" variant="gradient">
+												<Button
+													color="lime"
+													variant="gradient"
+													className="shadow-none">
 													View Details
 												</Button>
 											</Link>

@@ -67,10 +67,10 @@ const AddToy = () => {
 							<img src="/assets/error.png" alt="" />
 						</div>
 
-						<div className="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
+						<div className="rounded-lg border border-gray-700 bg-black p-8 shadow-lg lg:col-span-3 lg:p-12">
 							<Typography
 								variant="h4"
-								color="black"
+								color="white"
 								className="text-center font-cursive font-normal">
 								Add A New Toy
 							</Typography>
@@ -82,7 +82,7 @@ const AddToy = () => {
 										name="name"
 										label="Toy Name"
 										type="text"
-										color="blue-gray"
+										className="text-gray-100"
 										variant="outlined"
 										required
 									/>
@@ -90,8 +90,8 @@ const AddToy = () => {
 									<Textarea
 										name="desc"
 										label="Description"
-										color="blue-gray"
 										variant="outlined"
+										className="text-gray-100"
 										required
 									/>
 
@@ -101,7 +101,7 @@ const AddToy = () => {
 											name="price"
 											label="Price"
 											type="text"
-											color="blue-gray"
+											className="text-gray-100"
 											variant="outlined"
 											required
 										/>
@@ -110,7 +110,7 @@ const AddToy = () => {
 											name="category"
 											label="Select Category"
 											required
-											color="blue-gray"
+											className="text-gray-100"
 											variant="outlined"
 											animate={{
 												mount: { y: 0 },
@@ -128,7 +128,7 @@ const AddToy = () => {
 											name="ratings"
 											label="Ratings"
 											type="text"
-											color="blue-gray"
+											className="text-gray-100"
 											variant="outlined"
 											required
 										/>
@@ -137,7 +137,7 @@ const AddToy = () => {
 											name="quantity"
 											label="Quantity"
 											type="number"
-											color="blue-gray"
+											className="text-gray-100"
 											variant="outlined"
 											required
 										/>
@@ -147,7 +147,7 @@ const AddToy = () => {
 										name="photo"
 										label="Photo URL"
 										type="text"
-										color="blue-gray"
+										className="text-gray-100"
 										variant="outlined"
 										required
 									/>
@@ -159,7 +159,7 @@ const AddToy = () => {
 											label="Seller Name"
 											defaultValue={user && user?.displayName}
 											type="text"
-											color="blue-gray"
+											className="text-gray-100"
 											variant="outlined"
 											required
 										/>
@@ -169,7 +169,7 @@ const AddToy = () => {
 											label="Seller Email"
 											defaultValue={user && user?.email}
 											type="email"
-											color="blue-gray"
+											className="text-gray-100"
 											variant="outlined"
 											required
 										/>
@@ -180,7 +180,9 @@ const AddToy = () => {
 									{/* reset */}
 									<Button
 										type="reset"
-										className="bg-gray-100 text-black shadow"
+										color="white"
+										variant="gradient"
+										className="shadow-none"
 										fullWidth>
 										Reset
 									</Button>
@@ -189,6 +191,7 @@ const AddToy = () => {
 										type="submit"
 										color="lime"
 										variant="gradient"
+										className="shadow-none"
 										fullWidth>
 										Add
 									</Button>

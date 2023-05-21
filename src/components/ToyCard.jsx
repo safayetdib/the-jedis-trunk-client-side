@@ -16,23 +16,17 @@ const ToyCard = ({ toy }) => {
 	return (
 		<Card
 			variant="gradient"
-			color="white"
-			className="flex w-full flex-col justify-between border">
-			<CardHeader
-				floated={false}
-				color="blue-gray"
-				className="relative h-60 bg-black">
+			className="flex w-full flex-col justify-between bg-gray-900">
+			<CardHeader floated={false} className="relative h-60 bg-gray-700">
 				<img src={photo} alt={name} className="h-full w-full  object-cover" />
 			</CardHeader>
 			<CardBody className="pb-0">
-				<Typography
-					color="blue-gray"
-					className="mb-2 font-cursive text-lg tracking-wider">
+				<Typography className="mb-2 font-cursive text-lg tracking-wider text-gray-100">
 					{name}
 				</Typography>
 			</CardBody>
 			<CardFooter className="pt-0">
-				<div className="mb-4 items-center justify-between gap-4 sm:flex">
+				<div className="mb-4 items-center justify-between gap-4 text-gray-200 sm:flex">
 					<Typography className="text-base font-semibold">
 						Price: ${price}
 					</Typography>
@@ -42,7 +36,11 @@ const ToyCard = ({ toy }) => {
 					</div>
 				</div>
 				<Link to={`/toy/${_id}`}>
-					<Button variant="gradient" color="lime" size="md" fullWidth>
+					<Button
+						color="lime"
+						variant="gradient"
+						className="shadow-none"
+						fullWidth>
 						View Details
 					</Button>
 				</Link>

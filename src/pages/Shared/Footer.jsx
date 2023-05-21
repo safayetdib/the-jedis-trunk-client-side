@@ -1,6 +1,7 @@
 import { Typography } from '@material-tailwind/react';
 import { FaJedi } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import NavMenuLink from '../../components/NavMenuLink';
 
 const LINKS = [
 	{
@@ -69,19 +70,19 @@ const currentYear = new Date().getFullYear();
 
 const Footer = () => {
 	return (
-		<footer className="relative mt-8 w-full bg-lime-500 pt-12">
-			<div className="mx-auto w-full max-w-7xl px-8">
+		<footer className="relative mt-8 w-full bg-black pt-12 text-gray-200">
+			<div className="mx-auto w-full max-w-7xl px-4">
 				<div className="grid grid-cols-1 justify-between gap-4 lg:grid-cols-2">
 					<div>
-						{/* logo */}
+						{/* LOGO */}
 						<Link to="/">
-							<Typography className="flex cursor-pointer items-center gap-2 py-1.5 font-cursive text-gray-900 hover:text-gray-800">
-								<FaJedi className="text-3xl sm:text-5xl" />
+							<Typography className="ml-2 mr-4 flex cursor-pointer items-center gap-2 py-1.5 font-cursive">
+								<FaJedi className="text-3xl text-blue-500 sm:text-5xl" />
 								<span className="flex flex-col">
-									<span className="text-base sm:text-xl">
+									<span className="text-base text-gray-200 sm:text-xl">
 										The Jedi&apos;s Trunk
 									</span>
-									<span className="hidden text-xs sm:inline-block">
+									<span className="hidden text-xs text-gray-400 sm:inline-block">
 										The ultimate destination for Star Wars toy collectors
 									</span>
 								</span>
@@ -92,13 +93,26 @@ const Footer = () => {
 							enthusiasts come together to find their favorite characters,
 							ships, and lightsabers from a galaxy far, far away.
 						</p>
+
+						<div className="mt-6 w-fit rounded-full bg-gray-900">
+							<ul className="mb-4 mt-2 flex flex-row gap-2 lg:mb-0 lg:mt-0 lg:items-center">
+								{/* HOME */}
+								<NavMenuLink path="/">Home</NavMenuLink>
+
+								{/* ALL TOYS */}
+								<NavMenuLink path="/toys">All Toys</NavMenuLink>
+
+								{/* BLOGS */}
+								<NavMenuLink path="/blogs">Blogs</NavMenuLink>
+							</ul>
+						</div>
 					</div>
 					<div className="grid grid-cols-1 justify-between gap-4 sm:grid-cols-3">
 						{LINKS.map(({ title, items }) => (
 							<ul key={title}>
 								<Typography
 									variant="small"
-									color="blue-gray"
+									color="white"
 									className="mb-3 font-cursive">
 									{title}
 								</Typography>
@@ -107,7 +121,7 @@ const Footer = () => {
 										<Link to={item.path}>
 											<Typography
 												color="gray"
-												className="py-1.5 text-sm font-medium text-black opacity-90 transition-colors hover:underline">
+												className="py-1.5 text-sm font-medium text-gray-200 opacity-90 transition-colors hover:underline">
 												{item.title}
 											</Typography>
 										</Link>
@@ -117,17 +131,17 @@ const Footer = () => {
 						))}
 					</div>
 				</div>
-				<div className="mt-12 flex w-full flex-col items-center justify-center border-t border-gray-700 py-4 md:flex-row md:justify-between">
+				<div className="mt-12 flex w-full flex-col items-center justify-center border-t border-gray-500 py-4 md:flex-row md:justify-between">
 					<Typography
 						variant="small"
-						className="mb-4 text-center font-cursive text-blue-gray-800 md:mb-0">
+						className="mb-4 text-center font-cursive text-gray-400 md:mb-0">
 						&copy; {currentYear}{' '}
 						<Link to="/" className="hover:underline">
 							The Jedi&apos;s Trunk
 						</Link>
 						. All Rights Reserved.
 					</Typography>
-					<div className="flex gap-4 text-blue-gray-900 sm:justify-center">
+					<div className="flex gap-4 text-gray-400 sm:justify-center">
 						<Typography
 							as="a"
 							href="https://www.facebook.com/"
