@@ -14,7 +14,7 @@ const Home = () => {
 		<main>
 			<Helmet>
 				<meta charSet="utf-8" />
-				<title>The Jedi's Trunk | Home</title>
+				<title>The Jedi's Trunk</title>
 			</Helmet>
 
 			{/* BANNER */}
