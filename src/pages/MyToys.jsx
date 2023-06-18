@@ -119,7 +119,7 @@ const MyToys = () => {
 		<main className="mx-auto max-w-7xl px-2">
 			<Helmet>
 				<meta charSet="utf-8" />
-				<title>The Jedi's Trunk | My Toys</title>
+				<title>The Jedi&apos;s Trunk | My Toys</title>
 			</Helmet>
 			{/* header */}
 			<Card className="my-6 border border-gray-800 bg-black bg-opacity-70 p-2 md:p-10">

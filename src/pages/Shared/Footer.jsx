@@ -76,10 +76,10 @@ const Footer = () => {
 					<div>
 						{/* LOGO */}
 						<Link to="/">
-							<Typography className=" mr-4 flex cursor-pointer items-center gap-2 py-1.5 font-cursive">
-								<FaJedi className="text-3xl text-blue-500 sm:text-5xl" />
+							<Typography className="mr-4 flex cursor-pointer items-center gap-2 py-1.5 font-cursive">
+								<FaJedi className="text-3xl text-lime-500 sm:text-5xl" />
 								<span className="flex flex-col">
-									<span className="text-base text-gray-200 sm:text-xl">
+									<span className="text-xs text-gray-200 sm:text-xl">
 										The Jedi&apos;s Trunk
 									</span>
 									<span className="hidden text-xs text-gray-400 sm:inline-block">

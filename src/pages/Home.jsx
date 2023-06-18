@@ -4,9 +4,14 @@ import OfferBanner from '../components/OfferBanner';
 import ShopByCategory from '../components/ShopByCategory';
 import Testimonials from '../components/Testimonials';
 import { Helmet } from 'react-helmet';
+import Brands from '../components/Brands';
+import Faqs from '../components/Faqs';
+import NewsLetter from '../components/NewsLetter';
+import Featured from '../components/Featured';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
 AOS.init();
 
 const Home = () => {
@@ -14,33 +19,28 @@ const Home = () => {
 		<main>
 			<Helmet>
 				<meta charSet="utf-8" />
-				<title>The Jedi's Trunk</title>
+				<title>The Jedi&apos;s Trunk | Home</title>
 			</Helmet>
 
-			{/* BANNER */}
-			<div data-aos="fade-up" data-aos-duration="1000">
+			<div data-aos="fade-up">
 				<Banner />
 			</div>
-			{/* SHOP BY CATEGORY */}
-			<div data-aos="fade-up-left">
-				<ShopByCategory />
-			</div>
-			{/* Offer */}
-			<div data-aos="fade-up" data-aos-duration="1000">
-				<OfferBanner />
-			</div>
 
-			{/* GALLERY */}
-			<div
-				data-aos="fade-up"
-				data-aos-anchor-placement="center-bottom"
-				data-aos-duration="1000">
-				<Gallery />
-			</div>
-			{/*  */}
-			<div data-aos="fade-up-right" data-aos-duration="1000">
-				<Testimonials />
-			</div>
+			<Featured />
+
+			<Brands />
+
+			<ShopByCategory />
+
+			<OfferBanner />
+
+			<Testimonials />
+
+			<NewsLetter />
+
+			<Faqs />
+
+			<Gallery />
 		</main>
 	);
 };

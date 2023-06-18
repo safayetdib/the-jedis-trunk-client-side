@@ -1,9 +1,16 @@
 import { Typography } from '@material-tailwind/react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+AOS.init();
 
 const Testimonials = () => {
 	return (
-		<section className="">
-			<div className="mb-4 mt-12 border-y border-gray-800 bg-black bg-opacity-70 py-4 text-center  text-gray-100">
+		<section>
+			<div
+				className="mb-4 mt-12 border-y border-gray-800 bg-black bg-opacity-70 px-2 py-4  text-center text-gray-100"
+				data-aos="fade-up"
+				data-aos-offset="30">
 				<Typography variant="h3" className="font-cursive tracking-wide">
 					Testimonials
 				</Typography>
@@ -14,7 +21,10 @@ const Testimonials = () => {
 			</div>
 			<div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
 				<div className="[column-fill:_balance] sm:columns-2 sm:gap-6 lg:columns-3 lg:gap-8">
-					<div className="mb-8 sm:break-inside-avoid">
+					<div
+						className="mb-8 sm:break-inside-avoid"
+						data-aos="fade-up"
+						data-aos-duration="500">
 						<blockquote className="rounded-xl bg-gray-50 p-6 shadow">
 							<p className="leading-relaxed text-gray-700">
 								The quality and detail of the Star Wars toys I received from
@@ -36,7 +46,10 @@ const Testimonials = () => {
 						</div>
 					</div>
 
-					<div className="mb-8 sm:break-inside-avoid">
+					<div
+						className="mb-8 sm:break-inside-avoid"
+						data-aos="fade-up"
+						data-aos-duration="500">
 						<blockquote className="rounded-xl bg-gray-50 p-6 shadow">
 							<p className="leading-relaxed text-gray-700">
 								The customer service provided by this website was exceptional.
@@ -58,7 +71,10 @@ const Testimonials = () => {
 						</div>
 					</div>
 
-					<div className="mb-8 sm:break-inside-avoid">
+					<div
+						className="mb-8 sm:break-inside-avoid"
+						data-aos="fade-up"
+						data-aos-duration="1000">
 						<blockquote className="rounded-xl bg-gray-50 p-6 shadow">
 							<p className="leading-relaxed text-gray-700">
 								I couldn't be happier with my purchase! The Darth Vader action
@@ -80,7 +96,10 @@ const Testimonials = () => {
 						</div>
 					</div>
 
-					<div className="mb-8 sm:break-inside-avoid">
+					<div
+						className="mb-8 sm:break-inside-avoid"
+						data-aos="fade-up"
+						data-aos-duration="1000">
 						<blockquote className="rounded-xl bg-gray-50 p-6 shadow">
 							<p className="leading-relaxed text-gray-700">
 								This website offers an impressive selection of Star Wars LEGO
@@ -102,7 +121,10 @@ const Testimonials = () => {
 						</div>
 					</div>
 
-					<div className="mb-8 sm:break-inside-avoid">
+					<div
+						className="mb-8 sm:break-inside-avoid"
+						data-aos="fade-up"
+						data-aos-duration="1500">
 						<blockquote className="rounded-xl bg-gray-50 p-6 shadow">
 							<p className="leading-relaxed text-gray-700">
 								I was searching for a specific lightsaber replica, and this
@@ -125,7 +147,10 @@ const Testimonials = () => {
 						</div>
 					</div>
 
-					<div className="mb-8 sm:break-inside-avoid">
+					<div
+						className="mb-8 sm:break-inside-avoid"
+						data-aos="fade-up"
+						data-aos-duration="500">
 						<blockquote className="rounded-xl bg-gray-50 p-6 shadow">
 							<p className="leading-relaxed text-gray-700">
 								I recently purchased a Star Wars action figure gift set from

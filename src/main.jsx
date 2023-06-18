@@ -5,6 +5,7 @@ import { ThemeProvider } from '@material-tailwind/react';
 import { RouterProvider } from 'react-router-dom';
 import router from './routes/Routes';
 import AuthProvider from './context/AuthProvider';
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 const customTheme = {
 	dialog: {
@@ -24,7 +25,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
 		<ThemeProvider value={customTheme}>
 			<AuthProvider>
-				<RouterProvider router={router} />
+				<ParallaxProvider>
+					<RouterProvider router={router} />
+				</ParallaxProvider>
 			</AuthProvider>
 		</ThemeProvider>
 	</React.StrictMode>

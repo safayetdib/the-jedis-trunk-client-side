@@ -28,6 +28,10 @@ import NavMenuLink from '../../components/NavMenuLink';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { AuthContext } from '../../context/AuthProvider';
 import { Toaster, toast } from 'react-hot-toast';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+AOS.init();
 
 const Header = () => {
 	const [isNavOpen, setIsNavOpen] = useState(false);
@@ -53,7 +57,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className="my-4 px-2">
+		<header className="my-4 px-2" data-aos="fade-down">
 			<Navbar
 				variant="gradient"
 				className="mx-auto max-w-7xl border-0 bg-gray-900 p-2 lg:rounded-full lg:pl-6">
